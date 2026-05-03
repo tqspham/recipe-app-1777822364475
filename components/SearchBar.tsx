@@ -37,13 +37,13 @@ export default function SearchBar({ value, onChange, onClear, isLoading }: Searc
           placeholder="Search recipes by name or ingredient..."
           value={inputValue}
           onChange={handleInputChange}
-          className="w-full rounded-lg border border-gray-300 bg-white py-3 pl-10 pr-10 text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+          className="w-full rounded-[0.5rem] border border-gray-200 bg-white py-3 pl-10 pr-10 text-gray-900 placeholder-gray-400 shadow-sm transition-all duration-200 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 focus:outline-none disabled:bg-gray-50 disabled:cursor-not-allowed"
           disabled={isLoading}
         />
         {inputValue && (
           <button
             onClick={handleClear}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 transition-colors duration-200 hover:text-gray-600"
             aria-label="Clear search"
           >
             <X size={20} />
