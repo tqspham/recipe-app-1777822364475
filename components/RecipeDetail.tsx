@@ -30,6 +30,11 @@ export default function RecipeDetail({
   onEdit,
 }: RecipeDetailProps) {
   const [currentServings, setCurrentServings] = useState(recipe.servings);
+  const [imageError, setImageError] = useState(false);
+
+  const handleImageError = () => {
+    setImageError(true);
+  };
 
   return (
     <div className="max-w-4xl">
@@ -48,11 +53,21 @@ export default function RecipeDetail({
 
       {/* Main image */}
       <div className="mb-6 overflow-hidden rounded-[0.75rem] bg-gray-100 shadow-md">
-        <img
-          src={`https://loremflickr.com/800/400/${recipe.name}`}
-          alt={recipe.name}
-          className="h-96 w-full object-cover"
-        />
+        {recipe.imageUrl && !imageError ? (
+          <img
+            src={recipe.imageUrl}
+            alt={recipe.name}
+            onError={handleImageError}
+            className="h-96 w-full object-cover"
+          />
+        ) : (
+          <div className="h-96 w-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+            <div className="text-center">
+              <div className="text-6xl text-gray-400 mb-3">🍽️</div>
+              <p className="text-lg text-gray-500">No image available</p>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Title and description */}
