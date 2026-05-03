@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Mail, Lock } from 'lucide-react';
+import { Mail, Lock, CheckCircle } from 'lucide-react';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -10,10 +10,12 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(null);
+    setSuccessMessage(null);
     setIsLoading(true);
 
     try {
@@ -28,7 +30,10 @@ export default function LoginPage() {
         throw new Error(data.error || 'Failed to log in');
       }
 
-      router.push('/');
+      setSuccessMessage('Login successful! Redirecting...');
+      setTimeout(() => {
+        router.push('/');
+      }, 1500);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
@@ -46,6 +51,13 @@ export default function LoginPage() {
           {error && (
             <div className="mb-6 rounded-[0.75rem] border border-red-200 bg-red-50 p-4">
               <p className="text-sm text-red-700 font-medium">{error}</p>
+            </div>
+          )}
+
+          {successMessage && (
+            <div className="mb-6 rounded-[0.75rem] border border-green-200 bg-green-50 p-4 flex items-start gap-3">
+              <CheckCircle size={20} className="text-green-600 flex-shrink-0 mt-0.5" />
+              <p className="text-sm text-green-700 font-medium">{successMessage}</p>
             </div>
           )}
 
