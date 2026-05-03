@@ -39,7 +39,7 @@ export default function RecipeDetail({
       </div>
 
       {/* Main image */}
-      <div className="mb-6 overflow-hidden rounded-lg bg-gray-100">
+      <div className="mb-6 overflow-hidden rounded-[0.75rem] bg-gray-100 shadow-md">
         <img
           src={`https://loremflickr.com/800/400/${recipe.name}`}
           alt={recipe.name}
@@ -54,10 +54,10 @@ export default function RecipeDetail({
       </div>
 
       {/* Meta information */}
-      <div className="mb-6 grid gap-4 rounded-lg bg-gray-50 p-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mb-6 grid gap-4 rounded-[0.75rem] bg-gray-50 p-4 sm:grid-cols-2 lg:grid-cols-4 border border-gray-200">
         <div>
           <div className="flex items-center gap-2 text-sm font-medium text-gray-600">
-            <Clock size={18} />
+            <Clock size={18} className="text-gray-600" />
             <span>Prep Time</span>
           </div>
           <p className="mt-1 text-lg font-semibold text-gray-900">{recipe.prepTime} min</p>
@@ -65,7 +65,7 @@ export default function RecipeDetail({
 
         <div>
           <div className="flex items-center gap-2 text-sm font-medium text-gray-600">
-            <Clock size={18} />
+            <Clock size={18} className="text-gray-600" />
             <span>Cook Time</span>
           </div>
           <p className="mt-1 text-lg font-semibold text-gray-900">{recipe.cookTime} min</p>
@@ -73,7 +73,7 @@ export default function RecipeDetail({
 
         <div>
           <div className="flex items-center gap-2 text-sm font-medium text-gray-600">
-            <ChefHat size={18} />
+            <ChefHat size={18} className="text-gray-600" />
             <span>Difficulty</span>
           </div>
           <p className="mt-1 text-lg font-semibold text-gray-900">{recipe.difficulty}</p>
@@ -93,7 +93,7 @@ export default function RecipeDetail({
           <h3 className="mb-3 font-semibold text-gray-900">Dietary Information</h3>
           <div className="flex flex-wrap gap-2">
             {recipe.dietaryRestrictions.map((restriction) => (
-              <span key={restriction} className="rounded-full bg-green-100 px-3 py-1 text-sm text-green-700">
+              <span key={restriction} className="rounded-full bg-emerald-100 px-3 py-1 text-sm text-emerald-700 font-medium">
                 {restriction}
               </span>
             ))}
@@ -102,7 +102,7 @@ export default function RecipeDetail({
       )}
 
       {/* Servings adjuster */}
-      <div className="mb-6 rounded-lg border border-gray-200 bg-white p-4">
+      <div className="mb-6 rounded-[0.75rem] border border-gray-200 bg-white p-4 shadow-sm">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Users size={18} className="text-gray-600" />
