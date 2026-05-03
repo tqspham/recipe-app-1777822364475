@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Plus, Trash2 } from 'lucide-react';
 
 interface RecipeFormProps {
@@ -20,6 +20,22 @@ interface RecipeFormProps {
     instructions: string[];
   }) => Promise<void>;
   isSubmitting: boolean;
+  initialValues?: {
+    name: string;
+    description: string;
+    imageUrl: string;
+    prepTime: number;
+    cookTime: number;
+    servings: number;
+    difficulty: string;
+    rating: number;
+    cuisineType: string;
+    mealType: string;
+    dietaryRestrictions: string[];
+    ingredients: Array<{ name: string; quantity: number; unit: string }>;
+    instructions: string[];
+  };
+  isEditing?: boolean;
 }
 
 const DIFFICULTIES = ['Easy', 'Medium', 'Hard'];
@@ -28,7 +44,12 @@ const MEAL_TYPES = ['Breakfast', 'Lunch', 'Dinner', 'Dessert', 'Snack'];
 const DIETARY_OPTIONS = ['Vegetarian', 'Vegan', 'Gluten-Free', 'Dairy-Free', 'Keto', 'Paleo'];
 const UNITS = ['g', 'kg', 'ml', 'l', 'tsp', 'tbsp', 'cup', 'oz', 'lb', 'piece', 'pinch'];
 
-export default function RecipeForm({ onSubmit, isSubmitting }: RecipeFormProps) {
+export default function RecipeForm({
+  onSubmit,
+  isSubmitting,
+  initialValues,
+  isEditing = false,
+}: RecipeFormProps) {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [imageUrl, setImageUrl] = useState('');
@@ -45,6 +66,24 @@ export default function RecipeForm({ onSubmit, isSubmitting }: RecipeFormProps) 
   const [currentIngredient, setCurrentIngredient] = useState({ name: '', quantity: 1, unit: 'g' });
   const [currentInstruction, setCurrentInstruction] = useState('');
   const [errors, setErrors] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    if (initialValues) {
+      setName(initialValues.name);
+      setDescription(initialValues.description);
+      setImageUrl(initialValues.imageUrl);
+      setPrepTime(initialValues.prepTime);
+      setCookTime(initialValues.cookTime);
+      setServings(initialValues.servings);
+      setDifficulty(initialValues.difficulty);
+      setRating(initialValues.rating);
+      setCuisineType(initialValues.cuisineType);
+      setMealType(initialValues.mealType);
+      setDietaryRestrictions(initialValues.dietaryRestrictions);
+      setIngredients(initialValues.ingredients);
+      setInstructions(initialValues.instructions);
+    }
+  }, [initialValues]);
 
   const validateForm = (): boolean => {
     const newErrors: Record<string, string> = {};
@@ -490,9 +529,9 @@ export default function RecipeForm({ onSubmit, isSubmitting }: RecipeFormProps) 
           type="submit"
           disabled={isSubmitting}
           className="flex-1 rounded-[0.5rem] bg-blue-600 px-6 py-3 text-white font-medium transition-all duration-200 hover:bg-blue-700 active:bg-blue-800 disabled:bg-gray-400 disabled:cursor-not-allowed shadow-sm hover:shadow-md"
-          aria-label="Submit recipe creation form"
+          aria-label={isEditing ? 'Submit recipe edit form' : 'Submit recipe creation form'}
         >
-          {isSubmitting ? 'Creating Recipe...' : 'Create Recipe'}
+          {isSubmitting ? (isEditing ? 'Updating Recipe...' : 'Creating Recipe...') : (isEditing ? 'Update Recipe' : 'Create Recipe')}
         </button>
       </div>
     </form>
