@@ -1,14 +1,16 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { useRouter, useParams } from 'next/navigation';
+import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import RecipeDetail from '@/components/RecipeDetail';
+import EditButton from '@/components/EditButton';
 import { Recipe } from '@/lib/types';
 import { Plus } from 'lucide-react';
 
 export default function RecipeDetailPage() {
   const router = useRouter();
   const params = useParams();
+  const searchParams = useSearchParams();
   const id = typeof params.id === 'string' ? params.id : '';
 
   const [recipe, setRecipe] = useState<Recipe | null>(null);
@@ -16,6 +18,18 @@ export default function RecipeDetailPage() {
   const [error, setError] = useState<string | null>(null);
   const [isFavorite, setIsFavorite] = useState(false);
   const [isTogglingFavorite, setIsTogglingFavorite] = useState(false);
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
+  const isOwner = recipe && currentUserId && recipe.userId === currentUserId;
+
+  useEffect(() => {
+    if (searchParams.get('success') === 'true') {
+      setSuccessMessage('Recipe updated successfully!');
+      const timer = setTimeout(() => setSuccessMessage(null), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -28,6 +42,18 @@ export default function RecipeDetailPage() {
         setError(err instanceof Error ? err.message : 'An error occurred');
       } finally {
         setIsLoading(false);
+      }
+    };
+
+    const fetchCurrentUser = async () => {
+      try {
+        const response = await fetch('/api/user');
+        if (response.ok) {
+          const data: { userId: string } = await response.json();
+          setCurrentUserId(data.userId);
+        }
+      } catch (err) {
+        // Silent fail
       }
     };
 
@@ -45,6 +71,7 @@ export default function RecipeDetailPage() {
 
     if (id) {
       fetchRecipe();
+      fetchCurrentUser();
       fetchFavoriteStatus();
     }
   }, [id]);
@@ -76,6 +103,10 @@ export default function RecipeDetailPage() {
     } finally {
       setIsTogglingFavorite(false);
     }
+  };
+
+  const handleEdit = () => {
+    router.push(`/recipe/${id}/edit`);
   };
 
   const handleBack = () => {
@@ -143,12 +174,19 @@ export default function RecipeDetailPage() {
       </header>
 
       <main className="container mx-auto max-w-4xl px-4 py-8">
+        {successMessage && (
+          <div className="mb-6 rounded-[0.75rem] border border-green-200 bg-green-50 p-4">
+            <p className="text-sm text-green-700 font-medium">{successMessage}</p>
+          </div>
+        )}
         <RecipeDetail
           recipe={recipe}
           isFavorite={isFavorite}
           onFavoriteToggle={handleFavoriteToggle}
           onBack={handleBack}
           isTogglingFavorite={isTogglingFavorite}
+          isOwner={isOwner || false}
+          onEdit={handleEdit}
         />
       </main>
     </div>
