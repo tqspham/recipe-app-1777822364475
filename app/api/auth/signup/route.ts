@@ -58,25 +58,34 @@ export async function POST(request: NextRequest) {
 
     if (insertError) throw insertError;
 
-    const sessionToken = createSessionToken({ id: userId, email });
+    try {
+      const sessionToken = createSessionToken({ id: userId, email });
 
-    const response = NextResponse.json(
-      { success: true, userId },
-      { status: 201 }
-    );
+      const response = NextResponse.json(
+        { success: true, userId },
+        { status: 201 }
+      );
 
-    response.cookies.set('auth_token', sessionToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      maxAge: 24 * 60 * 60,
-      path: '/',
-    });
+      response.cookies.set('auth_token', sessionToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        maxAge: 24 * 60 * 60,
+        path: '/',
+      });
 
-    return response;
+      return response;
+    } catch (tokenError) {
+      const errorMessage = tokenError instanceof Error ? tokenError.message : 'Token creation failed';
+      return NextResponse.json(
+        { error: 'Failed to create account' },
+        { status: 500 }
+      );
+    }
   } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Failed to create account';
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : 'Failed to create account' },
+      { error: 'Failed to create account' },
       { status: 500 }
     );
   }
