@@ -7,6 +7,7 @@ import SearchBar from '@/components/SearchBar';
 import FilterPanel from '@/components/FilterPanel';
 import SortDropdown from '@/components/SortDropdown';
 import { Recipe } from '@/lib/types';
+import { Plus } from 'lucide-react';
 
 interface RecipesResponse {
   recipes: Recipe[];
@@ -181,6 +182,10 @@ export default function RecipePageContent() {
     router.push(`/recipe/${id}`);
   };
 
+  const handleCreateRecipe = () => {
+    router.push('/recipe/create');
+  };
+
   const handleFavoriteToggle = async (id: string, isFavorite: boolean) => {
     const newFavorites = new Set(favorites);
     if (isFavorite) {
@@ -227,8 +232,18 @@ export default function RecipePageContent() {
     <div className="min-h-screen bg-gray-50">
       <header className="sticky top-0 z-40 border-b border-gray-200 bg-white shadow-sm">
         <div className="container mx-auto max-w-7xl px-4 py-4">
-          <h1 className="text-3xl font-bold text-gray-900">Recipe Browser</h1>
-          <nav className="mt-4 flex gap-4">
+          <div className="flex items-center justify-between mb-4">
+            <h1 className="text-3xl font-bold text-gray-900">Recipe Browser</h1>
+            <button
+              onClick={handleCreateRecipe}
+              className="flex items-center gap-2 rounded-[0.5rem] bg-blue-600 px-4 py-2 text-white font-medium transition-all duration-200 hover:bg-blue-700 active:bg-blue-800 shadow-sm hover:shadow-md"
+              aria-label="Create a new recipe"
+            >
+              <Plus size={20} />
+              <span>Create Recipe</span>
+            </button>
+          </div>
+          <nav className="flex gap-4">
             <a href="/" className="text-lg font-medium text-blue-600 transition-colors duration-200 hover:text-blue-700">
               Recipes
             </a>
