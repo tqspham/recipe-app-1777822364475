@@ -229,10 +229,10 @@ export default function RecipePageContent() {
         <div className="container mx-auto max-w-7xl px-4 py-4">
           <h1 className="text-3xl font-bold text-gray-900">Recipe Browser</h1>
           <nav className="mt-4 flex gap-4">
-            <a href="/" className="text-lg font-medium text-blue-600 hover:text-blue-700">
+            <a href="/" className="text-lg font-medium text-blue-600 transition-colors duration-200 hover:text-blue-700">
               Recipes
             </a>
-            <a href="/favorites" className="text-lg font-medium text-gray-600 hover:text-gray-900">
+            <a href="/favorites" className="text-lg font-medium text-gray-600 transition-colors duration-200 hover:text-gray-900">
               Favorites
             </a>
           </nav>
