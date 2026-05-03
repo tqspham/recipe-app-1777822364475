@@ -21,6 +21,7 @@ export interface Recipe {
   ingredients: Ingredient[];
   instructions: string[];
   createdAt: string;
+  userId?: string;
 }
 
 export interface Favorite {
