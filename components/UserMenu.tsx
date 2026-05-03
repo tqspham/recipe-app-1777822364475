@@ -72,11 +72,12 @@ export default function UserMenu() {
     <div className="relative">
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className="flex items-center gap-2 rounded-[0.5rem] border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 transition-all duration-200 hover:bg-gray-50 hover:shadow-md active:bg-gray-100"
-        aria-label="User menu"
+        className="flex items-center gap-2 rounded-[0.5rem] border border-gray-300 bg-white px-3 py-2 text-gray-700 transition-all duration-200 hover:bg-gray-50 hover:shadow-md active:bg-gray-100 focus:outline-2 focus:outline-blue-500"
+        aria-label="View your profile"
+        title="View your profile"
       >
         <User size={18} />
-        <span className="hidden sm:inline max-w-[200px] truncate">{user.email}</span>
+        <span className="hidden sm:inline max-w-[200px] truncate text-sm font-medium">{user.email}</span>
       </button>
 
       {isMenuOpen && (
@@ -86,9 +87,20 @@ export default function UserMenu() {
             <p className="text-sm text-gray-600 truncate">{user.email}</p>
           </div>
           <button
+            onClick={() => {
+              setIsMenuOpen(false);
+              router.push('/profile');
+            }}
+            className="flex w-full items-center gap-2 px-4 py-3 text-sm text-gray-700 transition-colors duration-200 hover:bg-gray-50 focus:outline-2 focus:outline-blue-500"
+            aria-label="Go to your profile"
+          >
+            <User size={18} />
+            <span>View Profile</span>
+          </button>
+          <button
             onClick={handleLogout}
             disabled={isLoggingOut}
-            className="flex w-full items-center gap-2 px-4 py-3 text-sm text-gray-700 transition-colors duration-200 hover:bg-gray-50 disabled:text-gray-400 disabled:cursor-not-allowed"
+            className="flex w-full items-center gap-2 px-4 py-3 text-sm text-gray-700 transition-colors duration-200 hover:bg-gray-50 disabled:text-gray-400 disabled:cursor-not-allowed focus:outline-2 focus:outline-blue-500"
             aria-label="Log out"
           >
             <LogOut size={18} />
