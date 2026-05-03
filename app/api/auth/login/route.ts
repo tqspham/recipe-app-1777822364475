@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
 
     if (fetchError || !user) {
       return NextResponse.json(
-        { error: 'Invalid email or password' },
+        { error: 'Invalid credentials. Please check your email and password.' },
         { status: 401 }
       );
     }
@@ -34,30 +34,39 @@ export async function POST(request: NextRequest) {
     const passwordMatch = await verifyPassword(password, user.password_hash as string);
     if (!passwordMatch) {
       return NextResponse.json(
-        { error: 'Invalid email or password' },
+        { error: 'Invalid credentials. Please check your email and password.' },
         { status: 401 }
       );
     }
 
-    const sessionToken = createSessionToken({ id: user.id as string, email: user.email as string });
+    try {
+      const sessionToken = createSessionToken({ id: user.id as string, email: user.email as string });
 
-    const response = NextResponse.json(
-      { success: true, userId: user.id },
-      { status: 200 }
-    );
+      const response = NextResponse.json(
+        { success: true, userId: user.id },
+        { status: 200 }
+      );
 
-    response.cookies.set('auth_token', sessionToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      maxAge: 24 * 60 * 60,
-      path: '/',
-    });
+      response.cookies.set('auth_token', sessionToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        maxAge: 24 * 60 * 60,
+        path: '/',
+      });
 
-    return response;
+      return response;
+    } catch (tokenError) {
+      const errorMessage = tokenError instanceof Error ? tokenError.message : 'Token creation failed';
+      return NextResponse.json(
+        { error: 'Failed to log in' },
+        { status: 500 }
+      );
+    }
   } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Failed to log in';
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : 'Failed to log in' },
+      { error: 'Failed to log in' },
       { status: 500 }
     );
   }
