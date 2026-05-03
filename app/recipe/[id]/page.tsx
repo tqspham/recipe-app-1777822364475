@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import RecipeDetail from '@/components/RecipeDetail';
 import { Recipe } from '@/lib/types';
+import { Plus } from 'lucide-react';
 
 export default function RecipeDetailPage() {
   const router = useRouter();
@@ -81,6 +82,10 @@ export default function RecipeDetailPage() {
     router.back();
   };
 
+  const handleCreateRecipe = () => {
+    router.push('/recipe/create');
+  };
+
   if (isLoading) {
     return (
       <div className="flex h-screen items-center justify-center bg-gray-50">
@@ -113,10 +118,21 @@ export default function RecipeDetailPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <header className="border-b border-gray-200 bg-white shadow-sm">
+      <header className="sticky top-0 z-40 border-b border-gray-200 bg-white shadow-sm">
         <div className="container mx-auto max-w-4xl px-4 py-4">
+          <div className="flex items-center justify-between mb-4">
+            <h1 className="text-lg font-bold text-gray-900">Recipe Details</h1>
+            <button
+              onClick={handleCreateRecipe}
+              className="flex items-center gap-2 rounded-[0.5rem] bg-blue-600 px-4 py-2 text-white font-medium transition-all duration-200 hover:bg-blue-700 active:bg-blue-800 shadow-sm hover:shadow-md"
+              aria-label="Create a new recipe"
+            >
+              <Plus size={20} />
+              <span className="hidden sm:inline">Create Recipe</span>
+            </button>
+          </div>
           <nav className="flex gap-4">
-            <a href="/" className="text-lg font-medium text-blue-600 transition-colors duration-200 hover:text-blue-700">
+            <a href="/" className="text-lg font-medium text-gray-600 transition-colors duration-200 hover:text-gray-900">
               Recipes
             </a>
             <a href="/favorites" className="text-lg font-medium text-gray-600 transition-colors duration-200 hover:text-gray-900">
