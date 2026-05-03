@@ -1,51 +1,4 @@
-const textEncoder = new TextEncoder();
-const textDecoder = new TextDecoder();
-
-function base64UrlEncode(data: Uint8Array): string {
-  return btoa(String.fromCharCode(...data))
-    .replace(/\+/g, '-')
-    .replace(/\//g, '_')
-    .replace(/=/g, '');
-}
-
-function base64UrlDecode(str: string): Uint8Array {
-  str += '='.repeat((4 - (str.length % 4)) % 4);
-  const binaryString = atob(str.replace(/-/g, '+').replace(/_/g, '/'));
-  const bytes = new Uint8Array(binaryString.length);
-  for (let i = 0; i < binaryString.length; i++) {
-    bytes[i] = binaryString.charCodeAt(i);
-  }
-  return bytes;
-}
-
-async function hmacSha256(key: string, message: string): Promise<Uint8Array> {
-  if (typeof crypto === 'undefined') {
-    const { webcrypto } = await import('crypto');
-    const keyData = textEncoder.encode(key);
-    const messageData = textEncoder.encode(message);
-    const cryptoKey = await (webcrypto.subtle as SubtleCrypto).importKey(
-      'raw',
-      keyData,
-      { name: 'HMAC', hash: 'SHA-256' },
-      false,
-      ['sign']
-    );
-    const signature = await (webcrypto.subtle as SubtleCrypto).sign('HMAC', cryptoKey, messageData);
-    return new Uint8Array(signature);
-  }
-
-  const keyData = textEncoder.encode(key);
-  const messageData = textEncoder.encode(message);
-  const cryptoKey = await crypto.subtle.importKey(
-    'raw',
-    keyData,
-    { name: 'HMAC', hash: 'SHA-256' },
-    false,
-    ['sign']
-  );
-  const signature = await crypto.subtle.sign('HMAC', cryptoKey, messageData);
-  return new Uint8Array(signature);
-}
+import crypto from 'crypto';
 
 export function jwtSign(payload: Record<string, unknown>, secret: string): string {
   const header = { alg: 'HS256', typ: 'JWT' };
@@ -57,17 +10,16 @@ export function jwtSign(payload: Record<string, unknown>, secret: string): strin
     exp: now + expiresIn,
   };
 
-  const headerEncoded = base64UrlEncode(textEncoder.encode(JSON.stringify(header)));
-  const payloadEncoded = base64UrlEncode(textEncoder.encode(JSON.stringify(tokenPayload)));
+  const headerEncoded = Buffer.from(JSON.stringify(header)).toString('base64url');
+  const payloadEncoded = Buffer.from(JSON.stringify(tokenPayload)).toString('base64url');
   const message = `${headerEncoded}.${payloadEncoded}`;
 
-  (async () => {
-    const signature = await hmacSha256(secret, message);
-    const signatureEncoded = base64UrlEncode(signature);
-    return `${message}.${signatureEncoded}`;
-  })();
+  const signature = crypto
+    .createHmac('sha256', secret)
+    .update(message)
+    .digest('base64url');
 
-  return '';
+  return `${message}.${signature}`;
 }
 
 export function jwtVerify(token: string, secret: string): Record<string, unknown> {
@@ -77,23 +29,18 @@ export function jwtVerify(token: string, secret: string): Record<string, unknown
   }
 
   const [headerEncoded, payloadEncoded, signatureEncoded] = parts;
-
   const message = `${headerEncoded}.${payloadEncoded}`;
-  const signatureBytes = base64UrlDecode(signatureEncoded);
 
-  (async () => {
-    const expectedSignature = await hmacSha256(secret, message);
-    if (signatureBytes.length !== expectedSignature.length) {
-      throw new Error('Invalid signature');
-    }
-    for (let i = 0; i < signatureBytes.length; i++) {
-      if (signatureBytes[i] !== expectedSignature[i]) {
-        throw new Error('Invalid signature');
-      }
-    }
-  })();
+  const expectedSignature = crypto
+    .createHmac('sha256', secret)
+    .update(message)
+    .digest('base64url');
 
-  const payloadDecoded = textDecoder.decode(base64UrlDecode(payloadEncoded));
+  if (signatureEncoded !== expectedSignature) {
+    throw new Error('Invalid signature');
+  }
+
+  const payloadDecoded = Buffer.from(payloadEncoded, 'base64url').toString('utf-8');
   const payload = JSON.parse(payloadDecoded);
 
   const now = Math.floor(Date.now() / 1000);
