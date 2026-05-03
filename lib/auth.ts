@@ -42,12 +42,17 @@ export function validatePasswordStrength(password: string): { valid: boolean; er
 }
 
 export function createSessionToken(user: AuthUser): string {
-  return jwtSign({ id: user.id, email: user.email }, process.env.JWT_SECRET!);
+  try {
+    return jwtSign({ id: user.id, email: user.email }, process.env.JWT_SECRET);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'Failed to create session token';
+    throw new Error(`JWT creation failed: ${message}`);
+  }
 }
 
 export function verifySessionToken(token: string): AuthUser | null {
   try {
-    const payload = jwtVerify(token, process.env.JWT_SECRET!);
+    const payload = jwtVerify(token, process.env.JWT_SECRET);
     return { id: payload.id as string, email: payload.email as string };
   } catch (error) {
     return null;
