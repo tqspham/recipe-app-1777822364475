@@ -1,6 +1,15 @@
 import crypto from 'crypto';
 
-export function jwtSign(payload: Record<string, unknown>, secret: string): string {
+function validateSecret(secret: string | undefined): string {
+  if (!secret || secret.trim() === '') {
+    throw new Error('JWT_SECRET environment variable is not defined or is empty');
+  }
+  return secret;
+}
+
+export function jwtSign(payload: Record<string, unknown>, secret: string | undefined): string {
+  const validatedSecret = validateSecret(secret);
+
   const header = { alg: 'HS256', typ: 'JWT' };
   const now = Math.floor(Date.now() / 1000);
   const expiresIn = 24 * 60 * 60;
@@ -15,14 +24,16 @@ export function jwtSign(payload: Record<string, unknown>, secret: string): strin
   const message = `${headerEncoded}.${payloadEncoded}`;
 
   const signature = crypto
-    .createHmac('sha256', secret)
+    .createHmac('sha256', validatedSecret)
     .update(message)
     .digest('base64url');
 
   return `${message}.${signature}`;
 }
 
-export function jwtVerify(token: string, secret: string): Record<string, unknown> {
+export function jwtVerify(token: string, secret: string | undefined): Record<string, unknown> {
+  const validatedSecret = validateSecret(secret);
+
   const parts = token.split('.');
   if (parts.length !== 3) {
     throw new Error('Invalid token format');
@@ -32,7 +43,7 @@ export function jwtVerify(token: string, secret: string): Record<string, unknown
   const message = `${headerEncoded}.${payloadEncoded}`;
 
   const expectedSignature = crypto
-    .createHmac('sha256', secret)
+    .createHmac('sha256', validatedSecret)
     .update(message)
     .digest('base64url');
 
