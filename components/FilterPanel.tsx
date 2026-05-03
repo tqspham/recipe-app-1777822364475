@@ -81,13 +81,13 @@ export default function FilterPanel({
     selectedCuisines.size > 0 || selectedMealTypes.size > 0 || selectedDietary.size > 0;
 
   return (
-    <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+    <div className="rounded-[0.75rem] border border-gray-200 bg-white p-4 shadow-sm">
       <div className="mb-4 flex items-center justify-between">
         <h3 className="font-semibold text-gray-900">Filters</h3>
         {hasActiveFilters && (
           <button
             onClick={handleClearAll}
-            className="text-sm text-blue-600 hover:text-blue-700"
+            className="text-sm text-blue-600 font-medium transition-colors duration-200 hover:text-blue-700"
           >
             Clear All
           </button>
@@ -99,12 +99,12 @@ export default function FilterPanel({
         <div className="border-t border-gray-100 pt-2">
           <button
             onClick={() => toggleSection('cuisine')}
-            className="flex w-full items-center justify-between py-2 text-left text-sm font-medium text-gray-700 hover:text-gray-900"
+            className="flex w-full items-center justify-between py-2 text-left text-sm font-medium text-gray-700 transition-colors duration-200 hover:text-gray-900"
           >
             <span>Cuisine Type</span>
             <ChevronDown
               size={18}
-              className={`transition-transform ${
+              className={`transition-transform duration-200 ${
                 expandedSections.has('cuisine') ? 'rotate-180' : ''
               }`}
             />
@@ -112,12 +112,12 @@ export default function FilterPanel({
           {expandedSections.has('cuisine') && (
             <div className="space-y-2 py-2 pl-2">
               {cuisines.map((cuisine) => (
-                <label key={cuisine} className="flex items-center gap-2">
+                <label key={cuisine} className="flex items-center gap-2 cursor-pointer">
                   <input
                     type="checkbox"
                     checked={selectedCuisines.has(cuisine)}
                     onChange={() => handleCuisineToggle(cuisine)}
-                    className="h-4 w-4 rounded border-gray-300 text-blue-600"
+                    className="h-4 w-4 rounded border-gray-300 text-blue-600 transition-colors duration-200"
                   />
                   <span className="text-sm text-gray-700">{cuisine}</span>
                 </label>
@@ -130,12 +130,12 @@ export default function FilterPanel({
         <div className="border-t border-gray-100 pt-2">
           <button
             onClick={() => toggleSection('mealType')}
-            className="flex w-full items-center justify-between py-2 text-left text-sm font-medium text-gray-700 hover:text-gray-900"
+            className="flex w-full items-center justify-between py-2 text-left text-sm font-medium text-gray-700 transition-colors duration-200 hover:text-gray-900"
           >
             <span>Meal Type</span>
             <ChevronDown
               size={18}
-              className={`transition-transform ${
+              className={`transition-transform duration-200 ${
                 expandedSections.has('mealType') ? 'rotate-180' : ''
               }`}
             />
@@ -143,12 +143,12 @@ export default function FilterPanel({
           {expandedSections.has('mealType') && (
             <div className="space-y-2 py-2 pl-2">
               {mealTypes.map((mealType) => (
-                <label key={mealType} className="flex items-center gap-2">
+                <label key={mealType} className="flex items-center gap-2 cursor-pointer">
                   <input
                     type="checkbox"
                     checked={selectedMealTypes.has(mealType)}
                     onChange={() => handleMealTypeToggle(mealType)}
-                    className="h-4 w-4 rounded border-gray-300 text-blue-600"
+                    className="h-4 w-4 rounded border-gray-300 text-blue-600 transition-colors duration-200"
                   />
                   <span className="text-sm text-gray-700">{mealType}</span>
                 </label>
@@ -161,12 +161,12 @@ export default function FilterPanel({
         <div className="border-t border-gray-100 pt-2">
           <button
             onClick={() => toggleSection('dietary')}
-            className="flex w-full items-center justify-between py-2 text-left text-sm font-medium text-gray-700 hover:text-gray-900"
+            className="flex w-full items-center justify-between py-2 text-left text-sm font-medium text-gray-700 transition-colors duration-200 hover:text-gray-900"
           >
             <span>Dietary Restrictions</span>
             <ChevronDown
               size={18}
-              className={`transition-transform ${
+              className={`transition-transform duration-200 ${
                 expandedSections.has('dietary') ? 'rotate-180' : ''
               }`}
             />
@@ -174,12 +174,12 @@ export default function FilterPanel({
           {expandedSections.has('dietary') && (
             <div className="space-y-2 py-2 pl-2">
               {dietaryRestrictions.map((dietary) => (
-                <label key={dietary} className="flex items-center gap-2">
+                <label key={dietary} className="flex items-center gap-2 cursor-pointer">
                   <input
                     type="checkbox"
                     checked={selectedDietary.has(dietary)}
                     onChange={() => handleDietaryToggle(dietary)}
-                    className="h-4 w-4 rounded border-gray-300 text-blue-600"
+                    className="h-4 w-4 rounded border-gray-300 text-blue-600 transition-colors duration-200"
                   />
                   <span className="text-sm text-gray-700">{dietary}</span>
                 </label>
