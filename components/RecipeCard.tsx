@@ -25,6 +25,7 @@ export default function RecipeCard({
   onFavoriteToggle,
 }: RecipeCardProps) {
   const [isHovering, setIsHovering] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'Enter') {
@@ -35,6 +36,10 @@ export default function RecipeCard({
   const handleFavoriteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     onFavoriteToggle(!isFavorite);
+  };
+
+  const handleImageError = () => {
+    setImageError(true);
   };
 
   return (
@@ -49,11 +54,21 @@ export default function RecipeCard({
     >
       {/* Image Container */}
       <div className="relative overflow-hidden bg-gray-100 rounded-t-[0.75rem]">
-        <img
-          src={`https://loremflickr.com/400/300/${name}`}
-          alt={name}
-          className="h-48 w-full object-cover transition-transform duration-200 group-hover:scale-105"
-        />
+        {imageUrl && !imageError ? (
+          <img
+            src={imageUrl}
+            alt={name}
+            onError={handleImageError}
+            className="h-48 w-full object-cover transition-transform duration-200 group-hover:scale-105"
+          />
+        ) : (
+          <div className="h-48 w-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+            <div className="text-center">
+              <div className="text-4xl text-gray-400 mb-2">🍽️</div>
+              <p className="text-sm text-gray-500">No image available</p>
+            </div>
+          </div>
+        )}
 
         {/* Favorite Button */}
         <button
