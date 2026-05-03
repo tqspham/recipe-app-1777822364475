@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import BackButton from './BackButton';
 import FavoriteButton from './FavoriteButton';
+import EditButton from './EditButton';
 import IngredientsSection from './IngredientsSection';
 import InstructionsSection from './InstructionsSection';
 import ServingsAdjuster from './ServingsAdjuster';
@@ -15,6 +16,8 @@ interface RecipeDetailProps {
   onFavoriteToggle: (isFavorite: boolean) => void;
   onBack: () => void;
   isTogglingFavorite: boolean;
+  isOwner: boolean;
+  onEdit: () => void;
 }
 
 export default function RecipeDetail({
@@ -23,19 +26,24 @@ export default function RecipeDetail({
   onFavoriteToggle,
   onBack,
   isTogglingFavorite,
+  isOwner,
+  onEdit,
 }: RecipeDetailProps) {
   const [currentServings, setCurrentServings] = useState(recipe.servings);
 
   return (
     <div className="max-w-4xl">
-      {/* Header with back button */}
-      <div className="mb-6 flex items-start justify-between">
+      {/* Header with back button and actions */}
+      <div className="mb-6 flex items-start justify-between gap-3">
         <BackButton onClick={onBack} />
-        <FavoriteButton
-          isFavorite={isFavorite}
-          onClick={() => onFavoriteToggle(!isFavorite)}
-          isLoading={isTogglingFavorite}
-        />
+        <div className="flex gap-2">
+          {isOwner && <EditButton onClick={onEdit} />}
+          <FavoriteButton
+            isFavorite={isFavorite}
+            onClick={() => onFavoriteToggle(!isFavorite)}
+            isLoading={isTogglingFavorite}
+          />
+        </div>
       </div>
 
       {/* Main image */}
