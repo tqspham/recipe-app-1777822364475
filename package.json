@@ -15,7 +15,8 @@
     "tailwind-merge": "latest",
     "zustand": "^5",
     "bcryptjs": "^3.0.3",
-    "@supabase/supabase-js": "^2.103.3"
+    "@supabase/supabase-js": "^2.103.3",
+    "uuid": "^14.0.0"
   },
   "devDependencies": {
     "typescript": "^5",
