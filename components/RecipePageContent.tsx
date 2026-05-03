@@ -6,6 +6,7 @@ import RecipeList from '@/components/RecipeList';
 import SearchBar from '@/components/SearchBar';
 import FilterPanel from '@/components/FilterPanel';
 import SortDropdown from '@/components/SortDropdown';
+import UserMenu from '@/components/UserMenu';
 import { Recipe } from '@/lib/types';
 import { Plus } from 'lucide-react';
 
@@ -36,7 +37,6 @@ export default function RecipePageContent() {
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
   const [isLoadingFavorites, setIsLoadingFavorites] = useState(false);
 
-  // Load initial state from URL
   useEffect(() => {
     const q = searchParams.get('q') || '';
     const cuisines = searchParams.getAll('cuisine');
@@ -53,7 +53,6 @@ export default function RecipePageContent() {
     setSortBy(sort);
   }, [searchParams]);
 
-  // Fetch recipes
   useEffect(() => {
     const fetchRecipes = async () => {
       setIsLoading(true);
@@ -91,7 +90,6 @@ export default function RecipePageContent() {
     fetchRecipes();
   }, [currentPage, searchQuery, selectedCuisines, selectedMealTypes, selectedDietary, sortBy]);
 
-  // Fetch favorites
   useEffect(() => {
     const fetchFavorites = async () => {
       setIsLoadingFavorites(true);
@@ -210,7 +208,6 @@ export default function RecipePageContent() {
         });
       }
     } catch (err) {
-      // Revert on error
       const revertedFavorites = new Set(favorites);
       if (!isFavorite) {
         revertedFavorites.add(id);
@@ -234,14 +231,17 @@ export default function RecipePageContent() {
         <div className="container mx-auto max-w-7xl px-4 py-4">
           <div className="flex items-center justify-between mb-4">
             <h1 className="text-3xl font-bold text-gray-900">Recipe Browser</h1>
-            <button
-              onClick={handleCreateRecipe}
-              className="flex items-center gap-2 rounded-[0.5rem] bg-blue-600 px-4 py-2 text-white font-medium transition-all duration-200 hover:bg-blue-700 active:bg-blue-800 shadow-sm hover:shadow-md"
-              aria-label="Create a new recipe"
-            >
-              <Plus size={20} />
-              <span>Create Recipe</span>
-            </button>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={handleCreateRecipe}
+                className="flex items-center gap-2 rounded-[0.5rem] bg-blue-600 px-4 py-2 text-white font-medium transition-all duration-200 hover:bg-blue-700 active:bg-blue-800 shadow-sm hover:shadow-md"
+                aria-label="Create a new recipe"
+              >
+                <Plus size={20} />
+                <span>Create Recipe</span>
+              </button>
+              <UserMenu />
+            </div>
           </div>
           <nav className="flex gap-4">
             <a href="/" className="text-lg font-medium text-blue-600 transition-colors duration-200 hover:text-blue-700">
