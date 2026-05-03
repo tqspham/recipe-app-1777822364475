@@ -1,5 +1,5 @@
 import { supabase } from '@/lib/supabase';
-import { getUserId } from '@/lib/session';
+import { verifySessionToken } from '@/lib/auth';
 import { NextRequest, NextResponse } from 'next/server';
 
 interface UpdateRecipeRequest {
@@ -20,11 +20,26 @@ interface UpdateRecipeRequest {
 
 export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const userId = await getUserId();
+    const token = request.cookies.get('auth_token')?.value;
+
+    if (!token) {
+      return NextResponse.json(
+        { error: 'Authentication required' },
+        { status: 401 }
+      );
+    }
+
+    const user = verifySessionToken(token);
+    if (!user) {
+      return NextResponse.json(
+        { error: 'Invalid authentication token' },
+        { status: 401 }
+      );
+    }
+
     const { id } = await params;
     const body: UpdateRecipeRequest = await request.json();
 
-    // Verify ownership
     const { data: recipe, error: fetchError } = await supabase
       .from('recipe_app_1777822364475_recipes')
       .select('user_id')
@@ -35,14 +50,13 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
       return NextResponse.json({ error: 'Recipe not found' }, { status: 404 });
     }
 
-    if (recipe.user_id !== userId) {
+    if (recipe.user_id !== user.id) {
       return NextResponse.json(
         { error: 'You do not have permission to edit this recipe' },
         { status: 403 }
       );
     }
 
-    // Validate required fields
     if (!body.name || !body.description || !body.ingredients.length || !body.instructions.length) {
       return NextResponse.json(
         { error: 'Missing required fields' },
@@ -50,7 +64,6 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
       );
     }
 
-    // Update recipe
     const { error: updateError } = await supabase
       .from('recipe_app_1777822364475_recipes')
       .update({
@@ -69,7 +82,6 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
 
     if (updateError) throw updateError;
 
-    // Delete and recreate ingredients
     const { error: deleteIngredientsError } = await supabase
       .from('recipe_app_1777822364475_ingredients')
       .delete()
@@ -92,7 +104,6 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
       if (ingredientError) throw ingredientError;
     }
 
-    // Delete and recreate instructions
     const { error: deleteInstructionsError } = await supabase
       .from('recipe_app_1777822364475_instructions')
       .delete()
@@ -114,7 +125,6 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
       if (instructionError) throw instructionError;
     }
 
-    // Delete and recreate dietary restrictions
     const { error: deleteDietaryError } = await supabase
       .from('recipe_app_1777822364475_dietary_restrictions')
       .delete()
