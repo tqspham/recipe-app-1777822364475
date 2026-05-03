@@ -21,7 +21,7 @@ export interface Recipe {
   ingredients: Ingredient[];
   instructions: string[];
   createdAt: string;
-  userId?: string;
+  userId: string;
   publicVisibility?: boolean;
 }
 
