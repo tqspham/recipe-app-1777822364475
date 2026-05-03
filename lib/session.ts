@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers';
-import { v4 as uuidv4 } from 'crypto';
+import { v4 as uuidv4 } from 'uuid';
 
 const USER_ID_COOKIE = 'recipe_app_user_id';
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
