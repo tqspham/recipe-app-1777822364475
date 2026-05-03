@@ -58,7 +58,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
       <button
         onClick={handlePrevious}
         disabled={currentPage === 1}
-        className="rounded-lg border border-gray-300 bg-white p-2 text-gray-700 disabled:bg-gray-100 disabled:text-gray-400 hover:bg-gray-50 disabled:hover:bg-gray-100"
+        className="rounded-[0.5rem] border border-gray-300 bg-white p-2 text-gray-700 transition-all duration-200 hover:bg-gray-50 hover:shadow-md active:bg-gray-100 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed"
         aria-label="Previous page"
       >
         <ChevronLeft size={20} />
@@ -70,12 +70,12 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
             key={idx}
             onClick={() => typeof page === 'number' && onPageChange(page)}
             disabled={typeof page !== 'number'}
-            className={`px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
+            className={`px-3 py-2 text-sm font-medium rounded-[0.5rem] transition-all duration-200 ${
               page === currentPage
-                ? 'bg-blue-600 text-white'
+                ? 'bg-blue-600 text-white shadow-md'
                 : typeof page === 'number'
-                  ? 'border border-gray-300 bg-white text-gray-700 hover:bg-gray-50'
-                  : 'cursor-default text-gray-500'
+                  ? 'border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 hover:shadow-sm active:bg-gray-100'
+                  : 'cursor-default text-gray-400'
             }`}
           >
             {page}
@@ -86,7 +86,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
       <button
         onClick={handleNext}
         disabled={currentPage === totalPages}
-        className="rounded-lg border border-gray-300 bg-white p-2 text-gray-700 disabled:bg-gray-100 disabled:text-gray-400 hover:bg-gray-50 disabled:hover:bg-gray-100"
+        className="rounded-[0.5rem] border border-gray-300 bg-white p-2 text-gray-700 transition-all duration-200 hover:bg-gray-50 hover:shadow-md active:bg-gray-100 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed"
         aria-label="Next page"
       >
         <ChevronRight size={20} />
