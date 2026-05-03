@@ -22,11 +22,18 @@ export interface Recipe {
   instructions: string[];
   createdAt: string;
   userId?: string;
+  publicVisibility?: boolean;
 }
 
 export interface Favorite {
   id: string;
   userId: string;
   recipeId: string;
+  createdAt: string;
+}
+
+export interface User {
+  id: string;
+  email: string;
   createdAt: string;
 }
