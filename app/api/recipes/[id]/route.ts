@@ -44,6 +44,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
       rating: recipe.rating,
       cuisineType: recipe.cuisine_type,
       mealType: recipe.meal_type,
+      userId: recipe.user_id,
       ingredients: (ingredientsRes.data || []).map((ing) => ({
         id: ing.id,
         name: ing.name,
