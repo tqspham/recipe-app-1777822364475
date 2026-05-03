@@ -46,6 +46,7 @@ export async function POST(request: NextRequest) {
           rating: body.rating,
           cuisine_type: body.cuisineType,
           meal_type: body.mealType,
+          user_id: userId,
         },
       ])
       .select()
@@ -117,6 +118,7 @@ export async function POST(request: NextRequest) {
           ingredients: body.ingredients,
           instructions: body.instructions,
           createdAt: recipe.created_at,
+          userId: recipe.user_id,
         },
       },
       { status: 201 }
