@@ -25,17 +25,17 @@ export default function IngredientsSection({
   };
 
   return (
-    <div className="rounded-lg border border-gray-200 bg-white p-4">
+    <div className="rounded-[0.75rem] border border-gray-200 bg-white p-4 shadow-sm">
       <h2 className="mb-4 text-xl font-semibold text-gray-900">Ingredients</h2>
       <ul className="space-y-3">
         {ingredients.map((ingredient) => (
           <li key={ingredient.id} className="flex items-start gap-3">
             <span className="mt-1.5 flex-shrink-0">
-              <div className="h-2 w-2 rounded-full bg-blue-500" />
+              <div className="h-2 w-2 rounded-full bg-blue-600" />
             </span>
             <div className="flex-1">
-              <p className="text-gray-900">
-                <span className="font-medium">{formatQuantity(ingredient.quantity)}</span>
+              <p className="text-gray-900 text-sm">
+                <span className="font-semibold">{formatQuantity(ingredient.quantity)}</span>
                 <span className="ml-1 text-gray-600">{ingredient.unit}</span>
                 <span className="ml-2 text-gray-700">{ingredient.name}</span>
               </p>
