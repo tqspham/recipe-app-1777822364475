@@ -36,7 +36,6 @@ export default function LoginPage() {
       }, 1500);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
-    } finally {
       setIsLoading(false);
     }
   };
