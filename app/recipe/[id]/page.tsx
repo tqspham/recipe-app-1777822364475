@@ -83,12 +83,12 @@ export default function RecipeDetailPage() {
 
   if (isLoading) {
     return (
-      <div className="flex h-screen items-center justify-center">
+      <div className="flex h-screen items-center justify-center bg-gray-50">
         <div className="text-center">
           <div className="mb-4 inline-block">
-            <div className="h-12 w-12 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600"></div>
+            <div className="h-12 w-12 animate-pulse rounded-[0.5rem] border-4 border-gray-200 border-t-blue-600"></div>
           </div>
-          <p className="text-gray-600">Loading recipe...</p>
+          <p className="text-gray-600 font-medium">Loading recipe...</p>
         </div>
       </div>
     );
@@ -96,13 +96,13 @@ export default function RecipeDetailPage() {
 
   if (error || !recipe) {
     return (
-      <div className="flex h-screen items-center justify-center">
-        <div className="rounded-lg bg-red-50 p-8 text-center">
+      <div className="flex h-screen items-center justify-center bg-gray-50">
+        <div className="rounded-[0.75rem] bg-red-50 p-8 text-center border border-red-200">
           <h1 className="mb-2 text-2xl font-bold text-red-900">Error</h1>
           <p className="mb-4 text-red-700">{error || 'Recipe not found'}</p>
           <button
             onClick={handleBack}
-            className="rounded bg-red-600 px-4 py-2 text-white hover:bg-red-700"
+            className="rounded-[0.5rem] bg-red-600 px-4 py-2 text-white font-medium transition-all duration-200 hover:bg-red-700 active:bg-red-800"
           >
             Go Back
           </button>
@@ -116,10 +116,10 @@ export default function RecipeDetailPage() {
       <header className="border-b border-gray-200 bg-white shadow-sm">
         <div className="container mx-auto max-w-4xl px-4 py-4">
           <nav className="flex gap-4">
-            <a href="/" className="text-lg font-medium text-blue-600 hover:text-blue-700">
+            <a href="/" className="text-lg font-medium text-blue-600 transition-colors duration-200 hover:text-blue-700">
               Recipes
             </a>
-            <a href="/favorites" className="text-lg font-medium text-gray-600 hover:text-gray-900">
+            <a href="/favorites" className="text-lg font-medium text-gray-600 transition-colors duration-200 hover:text-gray-900">
               Favorites
             </a>
           </nav>
