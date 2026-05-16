@@ -24,7 +24,12 @@ export default function SortDropdown({ currentSort, onSortChange }: SortDropdown
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex w-full items-center justify-between rounded-[0.5rem] border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-700 shadow-sm transition-all duration-200 hover:bg-gray-50 hover:shadow-md focus:border-blue-600 focus:ring-2 focus:ring-blue-200 focus:outline-none"
+        className="flex w-full items-center justify-between rounded-[10px] border-2 px-4 py-3 text-sm font-medium shadow-sm transition-all duration-200"
+        style={{
+          backgroundColor: 'var(--color-surface)',
+          borderColor: 'var(--color-border)',
+          color: 'var(--color-text)',
+        }}
       >
         <span>{currentLabel}</span>
         <ChevronDown
@@ -34,7 +39,7 @@ export default function SortDropdown({ currentSort, onSortChange }: SortDropdown
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 top-full z-10 mt-2 w-full rounded-[0.5rem] border border-gray-200 bg-white shadow-lg">
+        <div className="absolute right-0 top-full z-10 mt-2 w-full rounded-[10px] border-2 shadow-lg" style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)' }}>
           {sortOptions.map((option) => (
             <button
               key={option.value}
@@ -42,11 +47,12 @@ export default function SortDropdown({ currentSort, onSortChange }: SortDropdown
                 onSortChange(option.value);
                 setIsOpen(false);
               }}
-              className={`block w-full px-4 py-3 text-left text-sm transition-colors duration-200 ${
-                currentSort === option.value
-                  ? 'bg-blue-50 font-semibold text-blue-600'
-                  : 'text-gray-700 hover:bg-gray-50'
-              }`}
+              className="block w-full px-4 py-3 text-left text-sm transition-colors duration-200"
+              style={{
+                backgroundColor: currentSort === option.value ? 'var(--color-background)' : 'transparent',
+                color: currentSort === option.value ? 'var(--color-primary)' : 'var(--color-text)',
+                fontWeight: currentSort === option.value ? '600' : '400',
+              }}
             >
               {option.label}
             </button>

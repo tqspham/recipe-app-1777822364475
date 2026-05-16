@@ -31,19 +31,25 @@ export default function SearchBar({ value, onChange, onClear, isLoading }: Searc
   return (
     <div className="relative">
       <div className="flex items-center">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2" size={20} style={{ color: 'var(--color-muted-text)' }} />
         <input
           type="text"
           placeholder="Search recipes by name or ingredient..."
           value={inputValue}
           onChange={handleInputChange}
-          className="w-full rounded-[0.5rem] border border-gray-200 bg-white py-3 pl-10 pr-10 text-gray-900 placeholder-gray-400 shadow-sm transition-all duration-200 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 focus:outline-none disabled:bg-gray-50 disabled:cursor-not-allowed"
+          className="w-full rounded-[10px] border-2 py-3 pl-10 pr-10 text-sm shadow-sm transition-all duration-200 disabled:cursor-not-allowed"
+          style={{
+            backgroundColor: 'var(--color-surface)',
+            borderColor: 'var(--color-border)',
+            color: 'var(--color-text)',
+          }}
           disabled={isLoading}
         />
         {inputValue && (
           <button
             onClick={handleClear}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 transition-colors duration-200 hover:text-gray-600"
+            className="absolute right-3 top-1/2 -translate-y-1/2 transition-colors duration-200"
+            style={{ color: 'var(--color-muted-text)' }}
             aria-label="Clear search"
           >
             <X size={20} />

@@ -52,7 +52,7 @@ export default function RecipeDetail({
       </div>
 
       {/* Main image */}
-      <div className="mb-6 overflow-hidden rounded-[0.75rem] bg-gray-100 shadow-md">
+      <div className="mb-6 overflow-hidden rounded-[14px] bg-[#E8DDD2] shadow-md border-2" style={{ borderColor: 'var(--color-border)' }}>
         {recipe.imageUrl && !imageError ? (
           <img
             src={recipe.imageUrl}
@@ -61,10 +61,10 @@ export default function RecipeDetail({
             className="h-96 w-full object-cover"
           />
         ) : (
-          <div className="h-96 w-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+          <div className="h-96 w-full bg-gradient-to-br from-[#E8DDD2] to-[#D9CCC0] flex items-center justify-center">
             <div className="text-center">
-              <div className="text-6xl text-gray-400 mb-3">🍽️</div>
-              <p className="text-lg text-gray-500">No image available</p>
+              <div className="text-6xl mb-3">🍽️</div>
+              <p className="text-lg" style={{ color: 'var(--color-muted-text)' }}>No image available</p>
             </div>
           </div>
         )}
@@ -72,51 +72,51 @@ export default function RecipeDetail({
 
       {/* Title and description */}
       <div className="mb-6">
-        <h1 className="mb-2 text-4xl font-bold text-gray-900">{recipe.name}</h1>
-        <p className="text-lg text-gray-600">{recipe.description}</p>
+        <h1 className="mb-2 text-4xl font-bold" style={{ color: 'var(--color-text)' }}>{recipe.name}</h1>
+        <p className="text-lg" style={{ color: 'var(--color-muted-text)' }}>{recipe.description}</p>
       </div>
 
       {/* Meta information */}
-      <div className="mb-6 grid gap-4 rounded-[0.75rem] bg-gray-50 p-4 sm:grid-cols-2 lg:grid-cols-4 border border-gray-200">
+      <div className="mb-6 grid gap-4 rounded-[12px] border-2 p-4 sm:grid-cols-2 lg:grid-cols-4" style={{ backgroundColor: 'var(--color-background)', borderColor: 'var(--color-border)' }}>
         <div>
-          <div className="flex items-center gap-2 text-sm font-medium text-gray-600">
-            <Clock size={18} className="text-gray-600" />
+          <div className="flex items-center gap-2 text-sm font-medium" style={{ color: 'var(--color-muted-text)' }}>
+            <Clock size={18} />
             <span>Prep Time</span>
           </div>
-          <p className="mt-1 text-lg font-semibold text-gray-900">{recipe.prepTime} min</p>
+          <p className="mt-1 text-lg font-semibold" style={{ color: 'var(--color-primary)' }}>{recipe.prepTime} min</p>
         </div>
 
         <div>
-          <div className="flex items-center gap-2 text-sm font-medium text-gray-600">
-            <Clock size={18} className="text-gray-600" />
+          <div className="flex items-center gap-2 text-sm font-medium" style={{ color: 'var(--color-muted-text)' }}>
+            <Clock size={18} />
             <span>Cook Time</span>
           </div>
-          <p className="mt-1 text-lg font-semibold text-gray-900">{recipe.cookTime} min</p>
+          <p className="mt-1 text-lg font-semibold" style={{ color: 'var(--color-primary)' }}>{recipe.cookTime} min</p>
         </div>
 
         <div>
-          <div className="flex items-center gap-2 text-sm font-medium text-gray-600">
-            <ChefHat size={18} className="text-gray-600" />
+          <div className="flex items-center gap-2 text-sm font-medium" style={{ color: 'var(--color-muted-text)' }}>
+            <ChefHat size={18} />
             <span>Difficulty</span>
           </div>
-          <p className="mt-1 text-lg font-semibold text-gray-900">{recipe.difficulty}</p>
+          <p className="mt-1 text-lg font-semibold" style={{ color: 'var(--color-primary)' }}>{recipe.difficulty}</p>
         </div>
 
         <div>
-          <div className="flex items-center gap-2 text-sm font-medium text-gray-600">
+          <div className="flex items-center gap-2 text-sm font-medium" style={{ color: 'var(--color-muted-text)' }}>
             <span>Cuisine</span>
           </div>
-          <p className="mt-1 text-lg font-semibold text-gray-900">{recipe.cuisineType}</p>
+          <p className="mt-1 text-lg font-semibold" style={{ color: 'var(--color-primary)' }}>{recipe.cuisineType}</p>
         </div>
       </div>
 
       {/* Dietary restrictions */}
       {recipe.dietaryRestrictions.length > 0 && (
         <div className="mb-6">
-          <h3 className="mb-3 font-semibold text-gray-900">Dietary Information</h3>
+          <h3 className="mb-3 font-semibold" style={{ color: 'var(--color-text)' }}>Dietary Information</h3>
           <div className="flex flex-wrap gap-2">
             {recipe.dietaryRestrictions.map((restriction) => (
-              <span key={restriction} className="rounded-full bg-emerald-100 px-3 py-1 text-sm text-emerald-700 font-medium">
+              <span key={restriction} className="rounded-full px-3 py-1 text-sm font-medium" style={{ backgroundColor: 'rgba(122, 155, 110, 0.15)', color: 'var(--color-success)' }}>
                 {restriction}
               </span>
             ))}
@@ -125,11 +125,11 @@ export default function RecipeDetail({
       )}
 
       {/* Servings adjuster */}
-      <div className="mb-6 rounded-[0.75rem] border border-gray-200 bg-white p-4 shadow-sm">
+      <div className="mb-6 rounded-[12px] border-2 p-4" style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)' }}>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Users size={18} className="text-gray-600" />
-            <span className="font-medium text-gray-900">Servings: {currentServings}</span>
+            <Users size={18} style={{ color: 'var(--color-muted-text)' }} />
+            <span className="font-medium" style={{ color: 'var(--color-text)' }}>Servings: {currentServings}</span>
           </div>
           <ServingsAdjuster
             currentServings={currentServings}

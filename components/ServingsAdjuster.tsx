@@ -28,7 +28,12 @@ export default function ServingsAdjuster({
       <button
         onClick={handleDecrease}
         disabled={currentServings <= 1}
-        className="rounded-[0.5rem] border border-gray-300 bg-white p-2 text-gray-700 transition-all duration-200 hover:bg-gray-50 hover:shadow-sm active:bg-gray-100 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed"
+        className="rounded-[8px] border-2 p-2 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+        style={{
+          backgroundColor: 'var(--color-surface)',
+          borderColor: 'var(--color-border)',
+          color: currentServings <= 1 ? 'var(--color-muted-text)' : 'var(--color-text)',
+        }}
         aria-label="Decrease servings"
       >
         <Minus size={18} />
@@ -38,13 +43,31 @@ export default function ServingsAdjuster({
         type="number"
         value={currentServings}
         onChange={(e) => onChange(Math.max(1, parseInt(e.target.value) || 1))}
-        className="w-16 rounded-[0.5rem] border border-gray-200 bg-white px-2 py-2 text-center text-gray-900 transition-all duration-200 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 focus:outline-none"
+        className="w-16 rounded-[8px] border-2 px-2 py-2 text-center transition-all duration-200"
+        style={{
+          backgroundColor: 'var(--color-surface)',
+          borderColor: 'var(--color-border)',
+          color: 'var(--color-text)',
+        }}
         min="1"
       />
 
       <button
         onClick={handleIncrease}
-        className="rounded-[0.5rem] border border-gray-300 bg-white p-2 text-gray-700 transition-all duration-200 hover:bg-gray-50 hover:shadow-sm active:bg-gray-100"
+        className="rounded-[8px] border-2 p-2 transition-all duration-200"
+        style={{
+          backgroundColor: 'var(--color-surface)',
+          borderColor: 'var(--color-border)',
+          color: 'var(--color-text)',
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.backgroundColor = 'var(--color-background)';
+          e.currentTarget.style.boxShadow = 'var(--shadow-md)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.backgroundColor = 'var(--color-surface)';
+          e.currentTarget.style.boxShadow = 'none';
+        }}
         aria-label="Increase servings"
       >
         <Plus size={18} />

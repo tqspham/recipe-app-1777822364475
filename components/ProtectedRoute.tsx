@@ -38,12 +38,18 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
 
   if (isAuthenticated === null) {
     return (
-      <div className="flex h-screen items-center justify-center bg-gray-50">
+      <div className="flex h-screen items-center justify-center" style={{ backgroundColor: 'var(--color-background)' }}>
         <div className="text-center">
           <div className="mb-4 inline-block">
-            <div className="h-12 w-12 animate-pulse rounded-[0.5rem] border-4 border-gray-200 border-t-blue-600"></div>
+            <div
+              className="h-12 w-12 animate-pulse rounded-[8px] border-4"
+              style={{
+                borderColor: 'var(--color-background)',
+                borderTopColor: 'var(--color-primary)',
+              }}
+            />
           </div>
-          <p className="text-gray-600 font-medium">Loading...</p>
+          <p className="font-medium" style={{ color: 'var(--color-muted-text)' }}>Loading...</p>
         </div>
       </div>
     );

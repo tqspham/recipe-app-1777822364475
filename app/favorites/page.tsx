@@ -93,15 +93,26 @@ export default function FavoritesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="sticky top-0 z-40 border-b border-gray-200 bg-white shadow-sm">
+    <div className="min-h-screen" style={{ backgroundColor: 'var(--color-background)' }}>
+      <header className="sticky top-0 z-40 border-b shadow-sm" style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)' }}>
         <div className="container mx-auto max-w-7xl px-4 py-4">
           <div className="flex items-center justify-between mb-4">
-            <h1 className="text-3xl font-bold text-gray-900">My Favorites</h1>
+            <h1 className="text-3xl font-bold" style={{ color: 'var(--color-text)' }}>My Favorites</h1>
             <div className="flex items-center gap-3">
               <button
                 onClick={handleCreateRecipe}
-                className="flex items-center gap-2 rounded-[0.5rem] bg-blue-600 px-4 py-2 text-white font-medium transition-all duration-200 hover:bg-blue-700 active:bg-blue-800 shadow-sm hover:shadow-md"
+                className="flex items-center gap-2 rounded-[12px] px-4 py-2 text-white font-medium transition-all duration-200 shadow-sm"
+                style={{ backgroundColor: 'var(--color-primary)' }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = '#8B5A3F';
+                  e.currentTarget.style.boxShadow = 'var(--shadow-md)';
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--color-primary)';
+                  e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                }}
                 aria-label="Create a new recipe"
               >
                 <Plus size={20} />
@@ -111,10 +122,10 @@ export default function FavoritesPage() {
             </div>
           </div>
           <nav className="flex gap-4">
-            <a href="/" className="text-lg font-medium text-gray-600 transition-colors duration-200 hover:text-gray-900">
+            <a href="/" className="text-lg font-medium transition-colors duration-200" style={{ color: 'var(--color-text)' }}>
               Recipes
             </a>
-            <a href="/favorites" className="text-lg font-medium text-blue-600 transition-colors duration-200 hover:text-blue-700">
+            <a href="/favorites" className="text-lg font-medium" style={{ color: 'var(--color-primary)' }}>
               Favorites
             </a>
           </nav>

@@ -119,12 +119,18 @@ export default function RecipeDetailPage() {
 
   if (isLoading) {
     return (
-      <div className="flex h-screen items-center justify-center bg-gray-50">
+      <div className="flex h-screen items-center justify-center" style={{ backgroundColor: 'var(--color-background)' }}>
         <div className="text-center">
           <div className="mb-4 inline-block">
-            <div className="h-12 w-12 animate-pulse rounded-[0.5rem] border-4 border-gray-200 border-t-blue-600"></div>
+            <div
+              className="h-12 w-12 animate-pulse rounded-[8px] border-4"
+              style={{
+                borderColor: 'var(--color-background)',
+                borderTopColor: 'var(--color-primary)',
+              }}
+            />
           </div>
-          <p className="text-gray-600 font-medium">Loading recipe...</p>
+          <p className="font-medium" style={{ color: 'var(--color-muted-text)' }}>Loading recipe...</p>
         </div>
       </div>
     );
@@ -132,13 +138,14 @@ export default function RecipeDetailPage() {
 
   if (error || !recipe) {
     return (
-      <div className="flex h-screen items-center justify-center bg-gray-50">
-        <div className="rounded-[0.75rem] bg-red-50 p-8 text-center border border-red-200">
-          <h1 className="mb-2 text-2xl font-bold text-red-900">Error</h1>
-          <p className="mb-4 text-red-700">{error || 'Recipe not found'}</p>
+      <div className="flex h-screen items-center justify-center" style={{ backgroundColor: 'var(--color-background)' }}>
+        <div className="rounded-[12px] border-2 p-8 text-center" style={{ backgroundColor: 'rgba(184, 92, 84, 0.05)', borderColor: 'var(--color-danger)' }}>
+          <h1 className="mb-2 text-2xl font-bold" style={{ color: 'var(--color-danger)' }}>Error</h1>
+          <p className="mb-4" style={{ color: 'var(--color-danger)' }}>{error || 'Recipe not found'}</p>
           <button
             onClick={handleBack}
-            className="rounded-[0.5rem] bg-red-600 px-4 py-2 text-white font-medium transition-all duration-200 hover:bg-red-700 active:bg-red-800"
+            className="rounded-[10px] px-4 py-2 text-white font-medium transition-all duration-200"
+            style={{ backgroundColor: 'var(--color-danger)' }}
           >
             Go Back
           </button>
@@ -148,14 +155,25 @@ export default function RecipeDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="sticky top-0 z-40 border-b border-gray-200 bg-white shadow-sm">
+    <div className="min-h-screen" style={{ backgroundColor: 'var(--color-background)' }}>
+      <header className="sticky top-0 z-40 border-b shadow-sm" style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)' }}>
         <div className="container mx-auto max-w-4xl px-4 py-4">
           <div className="flex items-center justify-between mb-4">
-            <h1 className="text-lg font-bold text-gray-900">Recipe Details</h1>
+            <h1 className="text-lg font-bold" style={{ color: 'var(--color-text)' }}>Recipe Details</h1>
             <button
               onClick={handleCreateRecipe}
-              className="flex items-center gap-2 rounded-[0.5rem] bg-blue-600 px-4 py-2 text-white font-medium transition-all duration-200 hover:bg-blue-700 active:bg-blue-800 shadow-sm hover:shadow-md"
+              className="flex items-center gap-2 rounded-[12px] px-4 py-2 text-white font-medium transition-all duration-200 shadow-sm"
+              style={{ backgroundColor: 'var(--color-primary)' }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#8B5A3F';
+                e.currentTarget.style.boxShadow = 'var(--shadow-md)';
+                e.currentTarget.style.transform = 'translateY(-2px)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--color-primary)';
+                e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
+                e.currentTarget.style.transform = 'translateY(0)';
+              }}
               aria-label="Create a new recipe"
             >
               <Plus size={20} />
@@ -163,10 +181,10 @@ export default function RecipeDetailPage() {
             </button>
           </div>
           <nav className="flex gap-4">
-            <a href="/" className="text-lg font-medium text-gray-600 transition-colors duration-200 hover:text-gray-900">
+            <a href="/" className="text-lg font-medium transition-colors duration-200" style={{ color: 'var(--color-text)' }}>
               Recipes
             </a>
-            <a href="/favorites" className="text-lg font-medium text-gray-600 transition-colors duration-200 hover:text-gray-900">
+            <a href="/favorites" className="text-lg font-medium transition-colors duration-200" style={{ color: 'var(--color-text)' }}>
               Favorites
             </a>
           </nav>
@@ -175,8 +193,8 @@ export default function RecipeDetailPage() {
 
       <main className="container mx-auto max-w-4xl px-4 py-8">
         {successMessage && (
-          <div className="mb-6 rounded-[0.75rem] border border-green-200 bg-green-50 p-4">
-            <p className="text-sm text-green-700 font-medium">{successMessage}</p>
+          <div className="mb-6 rounded-[10px] border-2 p-4" style={{ backgroundColor: 'rgba(122, 155, 110, 0.05)', borderColor: 'var(--color-success)' }}>
+            <p className="text-sm font-medium" style={{ color: 'var(--color-success)' }}>{successMessage}</p>
           </div>
         )}
         <RecipeDetail

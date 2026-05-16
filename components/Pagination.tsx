@@ -58,7 +58,12 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
       <button
         onClick={handlePrevious}
         disabled={currentPage === 1}
-        className="rounded-[0.5rem] border border-gray-300 bg-white p-2 text-gray-700 transition-all duration-200 hover:bg-gray-50 hover:shadow-md active:bg-gray-100 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed"
+        className="rounded-[8px] border-2 p-2 transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50"
+        style={{
+          backgroundColor: 'var(--color-surface)',
+          borderColor: 'var(--color-border)',
+          color: currentPage === 1 ? 'var(--color-muted-text)' : 'var(--color-text)',
+        }}
         aria-label="Previous page"
       >
         <ChevronLeft size={20} />
@@ -70,13 +75,19 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
             key={idx}
             onClick={() => typeof page === 'number' && onPageChange(page)}
             disabled={typeof page !== 'number'}
-            className={`px-3 py-2 text-sm font-medium rounded-[0.5rem] transition-all duration-200 ${
+            className={`px-3 py-2 text-sm font-medium rounded-[8px] transition-all duration-200 ${
               page === currentPage
-                ? 'bg-blue-600 text-white shadow-md'
+                ? ''
                 : typeof page === 'number'
-                  ? 'border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 hover:shadow-sm active:bg-gray-100'
-                  : 'cursor-default text-gray-400'
+                  ? 'border-2 cursor-pointer'
+                  : 'cursor-default'
             }`}
+            style={{
+              backgroundColor: page === currentPage ? 'var(--color-primary)' : 'var(--color-surface)',
+              borderColor: page === currentPage ? 'var(--color-primary)' : 'var(--color-border)',
+              color: page === currentPage ? 'white' : (typeof page === 'number' ? 'var(--color-text)' : 'var(--color-muted-text)'),
+              boxShadow: page === currentPage ? 'var(--shadow-md)' : 'none',
+            }}
           >
             {page}
           </button>
@@ -86,7 +97,12 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
       <button
         onClick={handleNext}
         disabled={currentPage === totalPages}
-        className="rounded-[0.5rem] border border-gray-300 bg-white p-2 text-gray-700 transition-all duration-200 hover:bg-gray-50 hover:shadow-md active:bg-gray-100 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed"
+        className="rounded-[8px] border-2 p-2 transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50"
+        style={{
+          backgroundColor: 'var(--color-surface)',
+          borderColor: 'var(--color-border)',
+          color: currentPage === totalPages ? 'var(--color-muted-text)' : 'var(--color-text)',
+        }}
         aria-label="Next page"
       >
         <ChevronRight size={20} />

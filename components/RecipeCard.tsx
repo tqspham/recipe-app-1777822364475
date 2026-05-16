@@ -50,10 +50,11 @@ export default function RecipeCard({
       onClick={onClick}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
-      className="group cursor-pointer rounded-[0.75rem] border border-gray-200 bg-white shadow-sm transition-all duration-200 hover:shadow-lg focus:outline-2 focus:outline-blue-500"
+      className="group cursor-pointer rounded-[14px] border-2 bg-[var(--color-surface)] shadow-sm transition-all duration-200 hover:shadow-[0_8px_16px_rgba(160,99,74,0.15)] hover:-translate-y-1 focus:outline-2 focus:outline-[var(--color-primary)]"
+      style={{ borderColor: 'var(--color-border)' }}
     >
       {/* Image Container */}
-      <div className="relative overflow-hidden bg-gray-100 rounded-t-[0.75rem]">
+      <div className="relative overflow-hidden bg-[#E8DDD2] rounded-t-[12px]">
         {imageUrl && !imageError ? (
           <img
             src={imageUrl}
@@ -62,10 +63,10 @@ export default function RecipeCard({
             className="h-48 w-full object-cover transition-transform duration-200 group-hover:scale-105"
           />
         ) : (
-          <div className="h-48 w-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+          <div className="h-48 w-full bg-gradient-to-br from-[#E8DDD2] to-[#D9CCC0] flex items-center justify-center">
             <div className="text-center">
-              <div className="text-4xl text-gray-400 mb-2">🍽️</div>
-              <p className="text-sm text-gray-500">No image available</p>
+              <div className="text-4xl mb-2">🍽️</div>
+              <p className="text-sm" style={{ color: 'var(--color-muted-text)' }}>No image available</p>
             </div>
           </div>
         )}
@@ -73,13 +74,13 @@ export default function RecipeCard({
         {/* Favorite Button */}
         <button
           onClick={handleFavoriteClick}
-          className="absolute right-2 top-2 rounded-[0.5rem] bg-white p-2 shadow-md transition-all duration-200 hover:bg-gray-100 active:bg-gray-200"
+          className="absolute right-2 top-2 rounded-[8px] bg-[var(--color-surface)] p-2 shadow-md transition-all duration-200 hover:bg-[#F5F1ED] active:bg-[#E8DDD2]"
           aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
         >
           <Heart
             size={20}
             className={`transition-colors duration-200 ${
-              isFavorite ? 'fill-red-500 stroke-red-500' : 'stroke-gray-400'
+              isFavorite ? 'fill-[var(--color-primary)] stroke-[var(--color-primary)]' : 'stroke-[var(--color-muted-text)]'
             }`}
           />
         </button>
@@ -87,15 +88,15 @@ export default function RecipeCard({
 
       {/* Content */}
       <div className="p-4">
-        <h3 className="line-clamp-2 text-lg font-semibold text-gray-900">{name}</h3>
+        <h3 className="line-clamp-2 text-lg font-semibold" style={{ color: 'var(--color-text)' }}>{name}</h3>
 
         <div className="mt-3 flex items-center justify-between gap-2">
-          <div className="flex items-center gap-1 text-sm text-gray-600">
-            <Clock size={16} className="text-gray-600" />
+          <div className="flex items-center gap-1 text-sm" style={{ color: 'var(--color-muted-text)' }}>
+            <Clock size={16} />
             <span>{prepTime} min</span>
           </div>
-          <div className="flex items-center gap-1 text-sm text-gray-600">
-            <Star size={16} className="fill-yellow-400 stroke-yellow-400" />
+          <div className="flex items-center gap-1 text-sm" style={{ color: 'var(--color-muted-text)' }}>
+            <Star size={16} className="fill-[var(--color-warning)] stroke-[var(--color-warning)]" />
             <span>{rating.toFixed(1)}</span>
           </div>
         </div>

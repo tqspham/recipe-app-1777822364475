@@ -10,26 +10,29 @@ export default function InstructionsSection({
   cookTime,
 }: InstructionsSectionProps) {
   return (
-    <div className="rounded-[0.75rem] border border-gray-200 bg-white p-4 shadow-sm">
-      <h2 className="mb-4 text-xl font-semibold text-gray-900">Instructions</h2>
+    <div className="rounded-[12px] border-2 p-4" style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)' }}>
+      <h2 className="mb-4 text-xl font-semibold" style={{ color: 'var(--color-text)' }}>Instructions</h2>
       <ol className="space-y-4">
         {instructions.map((instruction, idx) => (
           <li key={idx} className="flex gap-4">
             <div className="flex-shrink-0">
-              <div className="flex h-8 w-8 items-center justify-center rounded-[0.5rem] bg-blue-100 text-sm font-semibold text-blue-600">
+              <div
+                className="flex h-8 w-8 items-center justify-center rounded-[8px] text-sm font-semibold text-white"
+                style={{ backgroundColor: 'var(--color-primary)' }}
+              >
                 {idx + 1}
               </div>
             </div>
             <div className="pt-1">
-              <p className="text-gray-700 text-sm">{instruction}</p>
+              <p className="text-sm" style={{ color: 'var(--color-text)' }}>{instruction}</p>
             </div>
           </li>
         ))}
       </ol>
       {cookTime && (
-        <div className="mt-6 border-t border-gray-100 pt-4">
-          <p className="text-sm text-gray-600">
-            Total cooking time: <span className="font-semibold text-gray-900">{cookTime} minutes</span>
+        <div className="mt-6 pt-4" style={{ borderTop: '1px solid var(--color-border)' }}>
+          <p className="text-sm" style={{ color: 'var(--color-muted-text)' }}>
+            Total cooking time: <span className="font-semibold" style={{ color: 'var(--color-text)' }}>{cookTime} minutes</span>
           </p>
         </div>
       )}

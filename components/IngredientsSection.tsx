@@ -17,7 +17,6 @@ export default function IngredientsSection({
 
   const formatQuantity = (quantity: number): string => {
     const scaled = quantity * scaleFactor;
-    // Handle fractions for common amounts
     if (Math.abs(scaled - Math.round(scaled)) < 0.01) {
       return Math.round(scaled).toString();
     }
@@ -25,19 +24,19 @@ export default function IngredientsSection({
   };
 
   return (
-    <div className="rounded-[0.75rem] border border-gray-200 bg-white p-4 shadow-sm">
-      <h2 className="mb-4 text-xl font-semibold text-gray-900">Ingredients</h2>
+    <div className="rounded-[12px] border-2 p-4" style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)' }}>
+      <h2 className="mb-4 text-xl font-semibold" style={{ color: 'var(--color-text)' }}>Ingredients</h2>
       <ul className="space-y-3">
         {ingredients.map((ingredient) => (
           <li key={ingredient.id} className="flex items-start gap-3">
             <span className="mt-1.5 flex-shrink-0">
-              <div className="h-2 w-2 rounded-full bg-blue-600" />
+              <div className="h-2 w-2 rounded-full" style={{ backgroundColor: 'var(--color-primary)' }} />
             </span>
             <div className="flex-1">
-              <p className="text-gray-900 text-sm">
+              <p className="text-sm" style={{ color: 'var(--color-text)' }}>
                 <span className="font-semibold">{formatQuantity(ingredient.quantity)}</span>
-                <span className="ml-1 text-gray-600">{ingredient.unit}</span>
-                <span className="ml-2 text-gray-700">{ingredient.name}</span>
+                <span className="ml-1" style={{ color: 'var(--color-muted-text)' }}>{ingredient.unit}</span>
+                <span className="ml-2" style={{ color: 'var(--color-text)' }}>{ingredient.name}</span>
               </p>
             </div>
           </li>

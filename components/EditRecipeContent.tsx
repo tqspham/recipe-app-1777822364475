@@ -104,12 +104,18 @@ export default function EditRecipeContent() {
 
   if (isLoading) {
     return (
-      <div className="flex h-screen items-center justify-center bg-gray-50">
+      <div className="flex h-screen items-center justify-center" style={{ backgroundColor: 'var(--color-background)' }}>
         <div className="text-center">
           <div className="mb-4 inline-block">
-            <div className="h-12 w-12 animate-pulse rounded-[0.5rem] border-4 border-gray-200 border-t-blue-600"></div>
+            <div
+              className="h-12 w-12 animate-pulse rounded-[8px] border-4"
+              style={{
+                borderColor: 'var(--color-background)',
+                borderTopColor: 'var(--color-primary)',
+              }}
+            />
           </div>
-          <p className="text-gray-600 font-medium">Loading recipe...</p>
+          <p className="font-medium" style={{ color: 'var(--color-muted-text)' }}>Loading recipe...</p>
         </div>
       </div>
     );
@@ -117,13 +123,14 @@ export default function EditRecipeContent() {
 
   if (error || !recipe) {
     return (
-      <div className="flex h-screen items-center justify-center bg-gray-50">
-        <div className="rounded-[0.75rem] bg-red-50 p-8 text-center border border-red-200">
-          <h1 className="mb-2 text-2xl font-bold text-red-900">Error</h1>
-          <p className="mb-4 text-red-700">{error || 'Recipe not found'}</p>
+      <div className="flex h-screen items-center justify-center" style={{ backgroundColor: 'var(--color-background)' }}>
+        <div className="rounded-[12px] border-2 p-8 text-center" style={{ backgroundColor: 'rgba(184, 92, 84, 0.05)', borderColor: 'var(--color-danger)' }}>
+          <h1 className="mb-2 text-2xl font-bold" style={{ color: 'var(--color-danger)' }}>Error</h1>
+          <p className="mb-4" style={{ color: 'var(--color-danger)' }}>{error || 'Recipe not found'}</p>
           <button
             onClick={handleBack}
-            className="rounded-[0.5rem] bg-red-600 px-4 py-2 text-white font-medium transition-all duration-200 hover:bg-red-700 active:bg-red-800"
+            className="rounded-[10px] px-4 py-2 text-white font-medium transition-all duration-200"
+            style={{ backgroundColor: 'var(--color-danger)' }}
           >
             Go Back
           </button>
@@ -134,13 +141,14 @@ export default function EditRecipeContent() {
 
   if (!isOwner) {
     return (
-      <div className="flex h-screen items-center justify-center bg-gray-50">
-        <div className="rounded-[0.75rem] bg-red-50 p-8 text-center border border-red-200">
-          <h1 className="mb-2 text-2xl font-bold text-red-900">Access Denied</h1>
-          <p className="mb-4 text-red-700">You do not have permission to edit this recipe.</p>
+      <div className="flex h-screen items-center justify-center" style={{ backgroundColor: 'var(--color-background)' }}>
+        <div className="rounded-[12px] border-2 p-8 text-center" style={{ backgroundColor: 'rgba(184, 92, 84, 0.05)', borderColor: 'var(--color-danger)' }}>
+          <h1 className="mb-2 text-2xl font-bold" style={{ color: 'var(--color-danger)' }}>Access Denied</h1>
+          <p className="mb-4" style={{ color: 'var(--color-danger)' }}>You do not have permission to edit this recipe.</p>
           <button
             onClick={handleBack}
-            className="rounded-[0.5rem] bg-red-600 px-4 py-2 text-white font-medium transition-all duration-200 hover:bg-red-700 active:bg-red-800"
+            className="rounded-[10px] px-4 py-2 text-white font-medium transition-all duration-200"
+            style={{ backgroundColor: 'var(--color-danger)' }}
           >
             Go Back
           </button>
@@ -150,14 +158,14 @@ export default function EditRecipeContent() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="border-b border-gray-200 bg-white shadow-sm">
+    <div className="min-h-screen" style={{ backgroundColor: 'var(--color-background)' }}>
+      <header className="border-b" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-surface)' }}>
         <div className="container mx-auto max-w-4xl px-4 py-4">
           <nav className="flex gap-4">
-            <a href="/" className="text-lg font-medium text-gray-600 transition-colors duration-200 hover:text-gray-900">
+            <a href="/" className="text-lg font-medium transition-colors duration-200" style={{ color: 'var(--color-text)' }}>
               Recipes
             </a>
-            <a href="/favorites" className="text-lg font-medium text-gray-600 transition-colors duration-200 hover:text-gray-900">
+            <a href="/favorites" className="text-lg font-medium transition-colors duration-200" style={{ color: 'var(--color-text)' }}>
               Favorites
             </a>
           </nav>
@@ -169,12 +177,12 @@ export default function EditRecipeContent() {
           <BackButton onClick={handleBack} />
         </div>
 
-        <div className="rounded-[0.75rem] border border-gray-200 bg-white p-6 shadow-sm">
-          <h1 className="mb-6 text-3xl font-bold text-gray-900">Edit Recipe</h1>
+        <div className="rounded-[12px] border-2 p-6" style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)' }}>
+          <h1 className="mb-6 text-3xl font-bold" style={{ color: 'var(--color-text)' }}>Edit Recipe</h1>
 
           {submitError && (
-            <div className="mb-6 rounded-[0.75rem] border border-red-200 bg-red-50 p-4">
-              <p className="text-sm text-red-700 font-medium">{submitError}</p>
+            <div className="mb-6 rounded-[10px] border-2 p-4" style={{ backgroundColor: 'rgba(184, 92, 84, 0.05)', borderColor: 'var(--color-danger)' }}>
+              <p className="text-sm font-medium" style={{ color: 'var(--color-danger)' }}>{submitError}</p>
             </div>
           )}
 

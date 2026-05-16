@@ -168,10 +168,10 @@ export default function RecipeForm({
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Basic Info */}
       <div className="space-y-4">
-        <h2 className="text-xl font-semibold text-gray-900">Basic Information</h2>
+        <h2 className="text-xl font-semibold" style={{ color: 'var(--color-text)' }}>Basic Information</h2>
 
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="name" className="block text-sm font-medium" style={{ color: 'var(--color-text)' }}>
             Recipe Name *
           </label>
           <input
@@ -179,15 +179,16 @@ export default function RecipeForm({
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="mt-1 w-full rounded-[0.5rem] border border-gray-200 bg-white px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all duration-200"
+            className="mt-1 w-full rounded-[8px] border-2 bg-[var(--color-surface)] px-3 py-2 text-[var(--color-text)] placeholder-[var(--color-muted-text)] focus:border-[var(--color-warning)] focus:ring-2 focus:ring-[rgba(196,141,79,0.1)] focus:outline-none transition-all duration-200"
+            style={{ borderColor: 'var(--color-border)' }}
             placeholder="e.g., Pasta Carbonara"
             disabled={isSubmitting}
           />
-          {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
+          {errors.name && <p className="mt-1 text-sm" style={{ color: 'var(--color-danger)' }}>{errors.name}</p>}
         </div>
 
         <div>
-          <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="description" className="block text-sm font-medium" style={{ color: 'var(--color-text)' }}>
             Description *
           </label>
           <textarea
@@ -195,15 +196,16 @@ export default function RecipeForm({
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             rows={3}
-            className="mt-1 w-full rounded-[0.5rem] border border-gray-200 bg-white px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all duration-200"
+            className="mt-1 w-full rounded-[8px] border-2 bg-[var(--color-surface)] px-3 py-2 text-[var(--color-text)] placeholder-[var(--color-muted-text)] focus:border-[var(--color-warning)] focus:ring-2 focus:ring-[rgba(196,141,79,0.1)] focus:outline-none transition-all duration-200"
+            style={{ borderColor: 'var(--color-border)' }}
             placeholder="Describe your recipe..."
             disabled={isSubmitting}
           />
-          {errors.description && <p className="mt-1 text-sm text-red-600">{errors.description}</p>}
+          {errors.description && <p className="mt-1 text-sm" style={{ color: 'var(--color-danger)' }}>{errors.description}</p>}
         </div>
 
         <div>
-          <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="imageUrl" className="block text-sm font-medium" style={{ color: 'var(--color-text)' }}>
             Image URL
           </label>
           <input
@@ -211,7 +213,8 @@ export default function RecipeForm({
             type="text"
             value={imageUrl}
             onChange={(e) => setImageUrl(e.target.value)}
-            className="mt-1 w-full rounded-[0.5rem] border border-gray-200 bg-white px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all duration-200"
+            className="mt-1 w-full rounded-[8px] border-2 bg-[var(--color-surface)] px-3 py-2 text-[var(--color-text)] placeholder-[var(--color-muted-text)] focus:border-[var(--color-warning)] focus:ring-2 focus:ring-[rgba(196,141,79,0.1)] focus:outline-none transition-all duration-200"
+            style={{ borderColor: 'var(--color-border)' }}
             placeholder="https://example.com/image.jpg"
             disabled={isSubmitting}
           />
@@ -220,11 +223,11 @@ export default function RecipeForm({
 
       {/* Timing and Servings */}
       <div className="space-y-4">
-        <h2 className="text-xl font-semibold text-gray-900">Timing & Servings</h2>
+        <h2 className="text-xl font-semibold" style={{ color: 'var(--color-text)' }}>Timing & Servings</h2>
 
         <div className="grid gap-4 sm:grid-cols-3">
           <div>
-            <label htmlFor="prepTime" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="prepTime" className="block text-sm font-medium" style={{ color: 'var(--color-text)' }}>
               Prep Time (min) *
             </label>
             <input
@@ -233,14 +236,15 @@ export default function RecipeForm({
               min="1"
               value={prepTime}
               onChange={(e) => setPrepTime(Math.max(1, parseInt(e.target.value) || 1))}
-              className="mt-1 w-full rounded-[0.5rem] border border-gray-200 bg-white px-3 py-2 text-gray-900 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all duration-200"
+              className="mt-1 w-full rounded-[8px] border-2 bg-[var(--color-surface)] px-3 py-2 text-[var(--color-text)] focus:border-[var(--color-warning)] focus:ring-2 focus:ring-[rgba(196,141,79,0.1)] focus:outline-none transition-all duration-200"
+              style={{ borderColor: 'var(--color-border)' }}
               disabled={isSubmitting}
             />
-            {errors.prepTime && <p className="mt-1 text-sm text-red-600">{errors.prepTime}</p>}
+            {errors.prepTime && <p className="mt-1 text-sm" style={{ color: 'var(--color-danger)' }}>{errors.prepTime}</p>}
           </div>
 
           <div>
-            <label htmlFor="cookTime" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="cookTime" className="block text-sm font-medium" style={{ color: 'var(--color-text)' }}>
               Cook Time (min) *
             </label>
             <input
@@ -249,14 +253,15 @@ export default function RecipeForm({
               min="1"
               value={cookTime}
               onChange={(e) => setCookTime(Math.max(1, parseInt(e.target.value) || 1))}
-              className="mt-1 w-full rounded-[0.5rem] border border-gray-200 bg-white px-3 py-2 text-gray-900 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all duration-200"
+              className="mt-1 w-full rounded-[8px] border-2 bg-[var(--color-surface)] px-3 py-2 text-[var(--color-text)] focus:border-[var(--color-warning)] focus:ring-2 focus:ring-[rgba(196,141,79,0.1)] focus:outline-none transition-all duration-200"
+              style={{ borderColor: 'var(--color-border)' }}
               disabled={isSubmitting}
             />
-            {errors.cookTime && <p className="mt-1 text-sm text-red-600">{errors.cookTime}</p>}
+            {errors.cookTime && <p className="mt-1 text-sm" style={{ color: 'var(--color-danger)' }}>{errors.cookTime}</p>}
           </div>
 
           <div>
-            <label htmlFor="servings" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="servings" className="block text-sm font-medium" style={{ color: 'var(--color-text)' }}>
               Servings *
             </label>
             <input
@@ -265,28 +270,30 @@ export default function RecipeForm({
               min="1"
               value={servings}
               onChange={(e) => setServings(Math.max(1, parseInt(e.target.value) || 1))}
-              className="mt-1 w-full rounded-[0.5rem] border border-gray-200 bg-white px-3 py-2 text-gray-900 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all duration-200"
+              className="mt-1 w-full rounded-[8px] border-2 bg-[var(--color-surface)] px-3 py-2 text-[var(--color-text)] focus:border-[var(--color-warning)] focus:ring-2 focus:ring-[rgba(196,141,79,0.1)] focus:outline-none transition-all duration-200"
+              style={{ borderColor: 'var(--color-border)' }}
               disabled={isSubmitting}
             />
-            {errors.servings && <p className="mt-1 text-sm text-red-600">{errors.servings}</p>}
+            {errors.servings && <p className="mt-1 text-sm" style={{ color: 'var(--color-danger)' }}>{errors.servings}</p>}
           </div>
         </div>
       </div>
 
       {/* Recipe Details */}
       <div className="space-y-4">
-        <h2 className="text-xl font-semibold text-gray-900">Recipe Details</h2>
+        <h2 className="text-xl font-semibold" style={{ color: 'var(--color-text)' }}>Recipe Details</h2>
 
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
-            <label htmlFor="difficulty" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="difficulty" className="block text-sm font-medium" style={{ color: 'var(--color-text)' }}>
               Difficulty *
             </label>
             <select
               id="difficulty"
               value={difficulty}
               onChange={(e) => setDifficulty(e.target.value)}
-              className="mt-1 w-full rounded-[0.5rem] border border-gray-200 bg-white px-3 py-2 text-gray-900 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all duration-200"
+              className="mt-1 w-full rounded-[8px] border-2 bg-[var(--color-surface)] px-3 py-2 text-[var(--color-text)] focus:border-[var(--color-warning)] focus:ring-2 focus:ring-[rgba(196,141,79,0.1)] focus:outline-none transition-all duration-200"
+              style={{ borderColor: 'var(--color-border)' }}
               disabled={isSubmitting}
             >
               {DIFFICULTIES.map((d) => (
@@ -298,7 +305,7 @@ export default function RecipeForm({
           </div>
 
           <div>
-            <label htmlFor="rating" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="rating" className="block text-sm font-medium" style={{ color: 'var(--color-text)' }}>
               Rating (1-5) *
             </label>
             <input
@@ -309,20 +316,22 @@ export default function RecipeForm({
               step="0.1"
               value={rating}
               onChange={(e) => setRating(Math.min(5, Math.max(1, parseFloat(e.target.value) || 5)))}
-              className="mt-1 w-full rounded-[0.5rem] border border-gray-200 bg-white px-3 py-2 text-gray-900 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all duration-200"
+              className="mt-1 w-full rounded-[8px] border-2 bg-[var(--color-surface)] px-3 py-2 text-[var(--color-text)] focus:border-[var(--color-warning)] focus:ring-2 focus:ring-[rgba(196,141,79,0.1)] focus:outline-none transition-all duration-200"
+              style={{ borderColor: 'var(--color-border)' }}
               disabled={isSubmitting}
             />
           </div>
 
           <div>
-            <label htmlFor="cuisineType" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="cuisineType" className="block text-sm font-medium" style={{ color: 'var(--color-text)' }}>
               Cuisine Type *
             </label>
             <select
               id="cuisineType"
               value={cuisineType}
               onChange={(e) => setCuisineType(e.target.value)}
-              className="mt-1 w-full rounded-[0.5rem] border border-gray-200 bg-white px-3 py-2 text-gray-900 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all duration-200"
+              className="mt-1 w-full rounded-[8px] border-2 bg-[var(--color-surface)] px-3 py-2 text-[var(--color-text)] focus:border-[var(--color-warning)] focus:ring-2 focus:ring-[rgba(196,141,79,0.1)] focus:outline-none transition-all duration-200"
+              style={{ borderColor: 'var(--color-border)' }}
               disabled={isSubmitting}
             >
               {CUISINES.map((c) => (
@@ -334,14 +343,15 @@ export default function RecipeForm({
           </div>
 
           <div>
-            <label htmlFor="mealType" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="mealType" className="block text-sm font-medium" style={{ color: 'var(--color-text)' }}>
               Meal Type *
             </label>
             <select
               id="mealType"
               value={mealType}
               onChange={(e) => setMealType(e.target.value)}
-              className="mt-1 w-full rounded-[0.5rem] border border-gray-200 bg-white px-3 py-2 text-gray-900 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all duration-200"
+              className="mt-1 w-full rounded-[8px] border-2 bg-[var(--color-surface)] px-3 py-2 text-[var(--color-text)] focus:border-[var(--color-warning)] focus:ring-2 focus:ring-[rgba(196,141,79,0.1)] focus:outline-none transition-all duration-200"
+              style={{ borderColor: 'var(--color-border)' }}
               disabled={isSubmitting}
             >
               {MEAL_TYPES.map((m) => (
@@ -356,7 +366,7 @@ export default function RecipeForm({
 
       {/* Dietary Restrictions */}
       <div className="space-y-4">
-        <h2 className="text-xl font-semibold text-gray-900">Dietary Information</h2>
+        <h2 className="text-xl font-semibold" style={{ color: 'var(--color-text)' }}>Dietary Information</h2>
         <div className="flex flex-wrap gap-3">
           {DIETARY_OPTIONS.map((option) => (
             <label key={option} className="flex items-center gap-2 cursor-pointer">
@@ -364,10 +374,11 @@ export default function RecipeForm({
                 type="checkbox"
                 checked={dietaryRestrictions.includes(option)}
                 onChange={() => toggleDietary(option)}
-                className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-2 focus:ring-blue-200 transition-colors duration-200"
+                className="h-4 w-4 rounded border-2" 
+                style={{ borderColor: 'var(--color-border)', accentColor: 'var(--color-primary)' }}
                 disabled={isSubmitting}
               />
-              <span className="text-sm text-gray-700">{option}</span>
+              <span className="text-sm" style={{ color: 'var(--color-text)' }}>{option}</span>
             </label>
           ))}
         </div>
@@ -375,21 +386,24 @@ export default function RecipeForm({
 
       {/* Ingredients */}
       <div className="space-y-4">
-        <h2 className="text-xl font-semibold text-gray-900">Ingredients *</h2>
-        {errors.ingredients && <p className="text-sm text-red-600">{errors.ingredients}</p>}
+        <h2 className="text-xl font-semibold" style={{ color: 'var(--color-text)' }}>Ingredients *</h2>
+        {errors.ingredients && <p className="text-sm" style={{ color: 'var(--color-danger)' }}>{errors.ingredients}</p>}
 
         <div className="space-y-3">
           {ingredients.map((ingredient, index) => (
-            <div key={index} className="flex items-center justify-between rounded-[0.5rem] bg-gray-50 p-3 border border-gray-200">
+            <div key={index} className="flex items-center justify-between rounded-[8px] p-3 border-2" style={{ backgroundColor: 'var(--color-background)', borderColor: 'var(--color-border)' }}>
               <div className="flex-1">
-                <p className="text-sm font-medium text-gray-900">
-                  {ingredient.quantity} {ingredient.unit} {ingredient.name}
+                <p className="text-sm font-medium" style={{ color: 'var(--color-text)' }}>
+                  <span className="font-semibold">{ingredient.quantity}</span>
+                  <span className="ml-1" style={{ color: 'var(--color-muted-text)' }}>{ingredient.unit}</span>
+                  <span className="ml-2" style={{ color: 'var(--color-text)' }}>{ingredient.name}</span>
                 </p>
               </div>
               <button
                 type="button"
                 onClick={() => handleRemoveIngredient(index)}
-                className="rounded-[0.5rem] p-2 text-gray-600 transition-colors duration-200 hover:bg-gray-200 hover:text-gray-900 active:bg-gray-300"
+                className="rounded-[6px] p-2 transition-colors duration-200 hover:bg-[#E8DDD2]"
+                style={{ color: 'var(--color-muted-text)' }}
                 disabled={isSubmitting}
                 aria-label={`Remove ingredient ${ingredient.name}`}
               >
@@ -399,10 +413,10 @@ export default function RecipeForm({
           ))}
         </div>
 
-        <div className="space-y-3 rounded-[0.5rem] border border-gray-200 p-4 bg-white">
+        <div className="space-y-3 rounded-[8px] border-2 p-4" style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)' }}>
           <div className="grid gap-3 sm:grid-cols-3">
             <div>
-              <label htmlFor="ingredientName" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="ingredientName" className="block text-sm font-medium" style={{ color: 'var(--color-text)' }}>
                 Ingredient Name
               </label>
               <input
@@ -410,15 +424,16 @@ export default function RecipeForm({
                 type="text"
                 value={currentIngredient.name}
                 onChange={(e) => setCurrentIngredient({ ...currentIngredient, name: e.target.value })}
-                className="mt-1 w-full rounded-[0.5rem] border border-gray-200 bg-white px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all duration-200"
+                className="mt-1 w-full rounded-[8px] border-2 bg-[var(--color-surface)] px-3 py-2 text-[var(--color-text)] placeholder-[var(--color-muted-text)] focus:border-[var(--color-warning)] focus:ring-2 focus:ring-[rgba(196,141,79,0.1)] focus:outline-none transition-all duration-200"
+                style={{ borderColor: 'var(--color-border)' }}
                 placeholder="e.g., Flour"
                 disabled={isSubmitting}
               />
-              {errors.ingredientName && <p className="mt-1 text-sm text-red-600">{errors.ingredientName}</p>}
+              {errors.ingredientName && <p className="mt-1 text-sm" style={{ color: 'var(--color-danger)' }}>{errors.ingredientName}</p>}
             </div>
 
             <div>
-              <label htmlFor="ingredientQuantity" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="ingredientQuantity" className="block text-sm font-medium" style={{ color: 'var(--color-text)' }}>
                 Quantity
               </label>
               <input
@@ -428,21 +443,23 @@ export default function RecipeForm({
                 step="0.1"
                 value={currentIngredient.quantity}
                 onChange={(e) => setCurrentIngredient({ ...currentIngredient, quantity: parseFloat(e.target.value) || 1 })}
-                className="mt-1 w-full rounded-[0.5rem] border border-gray-200 bg-white px-3 py-2 text-gray-900 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all duration-200"
+                className="mt-1 w-full rounded-[8px] border-2 bg-[var(--color-surface)] px-3 py-2 text-[var(--color-text)] focus:border-[var(--color-warning)] focus:ring-2 focus:ring-[rgba(196,141,79,0.1)] focus:outline-none transition-all duration-200"
+                style={{ borderColor: 'var(--color-border)' }}
                 disabled={isSubmitting}
               />
-              {errors.ingredientQuantity && <p className="mt-1 text-sm text-red-600">{errors.ingredientQuantity}</p>}
+              {errors.ingredientQuantity && <p className="mt-1 text-sm" style={{ color: 'var(--color-danger)' }}>{errors.ingredientQuantity}</p>}
             </div>
 
             <div>
-              <label htmlFor="ingredientUnit" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="ingredientUnit" className="block text-sm font-medium" style={{ color: 'var(--color-text)' }}>
                 Unit
               </label>
               <select
                 id="ingredientUnit"
                 value={currentIngredient.unit}
                 onChange={(e) => setCurrentIngredient({ ...currentIngredient, unit: e.target.value })}
-                className="mt-1 w-full rounded-[0.5rem] border border-gray-200 bg-white px-3 py-2 text-gray-900 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all duration-200"
+                className="mt-1 w-full rounded-[8px] border-2 bg-[var(--color-surface)] px-3 py-2 text-[var(--color-text)] focus:border-[var(--color-warning)] focus:ring-2 focus:ring-[rgba(196,141,79,0.1)] focus:outline-none transition-all duration-200"
+                style={{ borderColor: 'var(--color-border)' }}
                 disabled={isSubmitting}
               >
                 {UNITS.map((u) => (
@@ -457,7 +474,10 @@ export default function RecipeForm({
           <button
             type="button"
             onClick={handleAddIngredient}
-            className="flex items-center justify-center gap-2 rounded-[0.5rem] border border-gray-300 bg-white px-4 py-2 text-gray-700 font-medium transition-all duration-200 hover:bg-gray-50 hover:shadow-md active:bg-gray-100 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed w-full"
+            className="flex items-center justify-center gap-2 rounded-[8px] border-2 px-4 py-2 font-medium transition-all duration-200 w-full" 
+            style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)', color: 'var(--color-text)' }}
+            onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--color-background)'; e.currentTarget.style.boxShadow = 'var(--shadow-md)'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--color-surface)'; e.currentTarget.style.boxShadow = 'var(--shadow-sm)'; }}
             disabled={isSubmitting}
             aria-label="Add ingredient"
           >
@@ -469,21 +489,22 @@ export default function RecipeForm({
 
       {/* Instructions */}
       <div className="space-y-4">
-        <h2 className="text-xl font-semibold text-gray-900">Instructions *</h2>
-        {errors.instructions && <p className="text-sm text-red-600">{errors.instructions}</p>}
+        <h2 className="text-xl font-semibold" style={{ color: 'var(--color-text)' }}>Instructions *</h2>
+        {errors.instructions && <p className="text-sm" style={{ color: 'var(--color-danger)' }}>{errors.instructions}</p>}
 
         <div className="space-y-3">
           {instructions.map((instruction, index) => (
-            <div key={index} className="flex items-start justify-between rounded-[0.5rem] bg-gray-50 p-3 border border-gray-200 gap-3">
+            <div key={index} className="flex items-start justify-between rounded-[8px] p-3 border-2 gap-3" style={{ backgroundColor: 'var(--color-background)', borderColor: 'var(--color-border)' }}>
               <div className="flex-1 pt-1">
-                <p className="text-sm text-gray-900">
-                  <span className="font-semibold text-gray-600">Step {index + 1}:</span> {instruction}
+                <p className="text-sm" style={{ color: 'var(--color-text)' }}>
+                  <span className="font-semibold" style={{ color: 'var(--color-muted-text)' }}>Step {index + 1}:</span> {instruction}
                 </p>
               </div>
               <button
                 type="button"
                 onClick={() => handleRemoveInstruction(index)}
-                className="rounded-[0.5rem] p-2 text-gray-600 transition-colors duration-200 hover:bg-gray-200 hover:text-gray-900 active:bg-gray-300 flex-shrink-0"
+                className="rounded-[6px] p-2 transition-colors duration-200 hover:bg-[#E8DDD2] flex-shrink-0"
+                style={{ color: 'var(--color-muted-text)' }}
                 disabled={isSubmitting}
                 aria-label={`Remove instruction ${index + 1}`}
               >
@@ -493,9 +514,9 @@ export default function RecipeForm({
           ))}
         </div>
 
-        <div className="space-y-3 rounded-[0.5rem] border border-gray-200 p-4 bg-white">
+        <div className="space-y-3 rounded-[8px] border-2 p-4" style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)' }}>
           <div>
-            <label htmlFor="instruction" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="instruction" className="block text-sm font-medium" style={{ color: 'var(--color-text)' }}>
               Instruction Step
             </label>
             <textarea
@@ -503,17 +524,21 @@ export default function RecipeForm({
               value={currentInstruction}
               onChange={(e) => setCurrentInstruction(e.target.value)}
               rows={3}
-              className="mt-1 w-full rounded-[0.5rem] border border-gray-200 bg-white px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all duration-200"
+              className="mt-1 w-full rounded-[8px] border-2 bg-[var(--color-surface)] px-3 py-2 text-[var(--color-text)] placeholder-[var(--color-muted-text)] focus:border-[var(--color-warning)] focus:ring-2 focus:ring-[rgba(196,141,79,0.1)] focus:outline-none transition-all duration-200"
+              style={{ borderColor: 'var(--color-border)' }}
               placeholder="Describe the next step..."
               disabled={isSubmitting}
             />
-            {errors.instructionText && <p className="mt-1 text-sm text-red-600">{errors.instructionText}</p>}
+            {errors.instructionText && <p className="mt-1 text-sm" style={{ color: 'var(--color-danger)' }}>{errors.instructionText}</p>}
           </div>
 
           <button
             type="button"
             onClick={handleAddInstruction}
-            className="flex items-center justify-center gap-2 rounded-[0.5rem] border border-gray-300 bg-white px-4 py-2 text-gray-700 font-medium transition-all duration-200 hover:bg-gray-50 hover:shadow-md active:bg-gray-100 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed w-full"
+            className="flex items-center justify-center gap-2 rounded-[8px] border-2 px-4 py-2 font-medium transition-all duration-200 w-full"
+            style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)', color: 'var(--color-text)' }}
+            onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--color-background)'; e.currentTarget.style.boxShadow = 'var(--shadow-md)'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'var(--color-surface)'; e.currentTarget.style.boxShadow = 'var(--shadow-sm)'; }}
             disabled={isSubmitting}
             aria-label="Add instruction"
           >
@@ -524,11 +549,16 @@ export default function RecipeForm({
       </div>
 
       {/* Submit Button */}
-      <div className="flex gap-3 pt-6 border-t border-gray-200">
+      <div className="flex gap-3 pt-6" style={{ borderTop: '1px solid var(--color-border)' }}>
         <button
           type="submit"
           disabled={isSubmitting}
-          className="flex-1 rounded-[0.5rem] bg-blue-600 px-6 py-3 text-white font-medium transition-all duration-200 hover:bg-blue-700 active:bg-blue-800 disabled:bg-gray-400 disabled:cursor-not-allowed shadow-sm hover:shadow-md"
+          className="flex-1 rounded-[12px] px-6 py-3 text-white font-medium transition-all duration-200 disabled:cursor-not-allowed shadow-sm"
+          style={{
+            backgroundColor: isSubmitting ? 'var(--color-muted-text)' : 'var(--color-primary)',
+          }}
+          onMouseEnter={(e) => { if (!isSubmitting) { e.currentTarget.style.backgroundColor = '#8B5A3F'; e.currentTarget.style.boxShadow = 'var(--shadow-md)'; e.currentTarget.style.transform = 'translateY(-2px)'; } }}
+          onMouseLeave={(e) => { if (!isSubmitting) { e.currentTarget.style.backgroundColor = 'var(--color-primary)'; e.currentTarget.style.boxShadow = 'var(--shadow-sm)'; e.currentTarget.style.transform = 'translateY(0)'; } }}
           aria-label={isEditing ? 'Submit recipe edit form' : 'Submit recipe creation form'}
         >
           {isSubmitting ? (isEditing ? 'Updating Recipe...' : 'Creating Recipe...') : (isEditing ? 'Update Recipe' : 'Create Recipe')}

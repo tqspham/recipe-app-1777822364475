@@ -1,55 +1,49 @@
-// Modern Design System Tokens
+// Rustic Farmhouse Design System Tokens
 
 export const colors = {
-  // Primary
+  // Primary - Warm Terracotta
   primary: {
-    50: '#eff6ff',
-    100: '#dbeafe',
-    200: '#bfdbfe',
-    500: '#3b82f6',
-    600: '#2563eb',
-    700: '#1d4ed8',
-    900: '#1e3a8a',
+    50: '#F5EBE7',
+    100: '#E8DDD2',
+    200: '#D9CCC0',
+    500: '#A0634A',
+    600: '#8B5A3F',
+    700: '#7A5037',
+    900: '#4A3428',
   },
-  // Secondary (Slate)
+  // Secondary - Burnt Orange
   secondary: {
-    400: '#94a3b8',
-    600: '#64748b',
-    700: '#475569',
+    400: '#D4845C',
+    600: '#C1754F',
+    700: '#A85C3B',
   },
-  // Semantic Colors
-  success: '#059669',
-  error: '#e11d48',
-  warning: '#d97706',
-  // Neutral Grays
-  gray: {
-    50: '#f8fafc',
-    100: '#f1f5f9',
-    200: '#e2e8f0',
-    300: '#cbd5e1',
-    400: '#94a3b8',
-    600: '#64748b',
-    700: '#475569',
-    900: '#0f172a',
+  // Accent - Warm Brown
+  accent: {
+    400: '#8B6F47',
+    600: '#7A5D3E',
+    700: '#6A4D31',
   },
+  // Sage Green - Success
+  success: '#7A9B6E',
+  // Warm Amber - Warning
+  warning: '#C48D4F',
+  // Warm Rust - Danger
+  danger: '#B85C54',
+  // Backgrounds
+  background: '#F5F1ED',
+  surface: '#FEFCF9',
+  // Text
+  text: '#3D2E28',
+  mutedText: '#8B7D73',
+  // Borders
+  border: '#D9CCC0',
   // Special
-  white: '#ffffff',
-  red: {
-    400: '#f87171',
-    500: '#ef4444',
-  },
-  yellow: {
-    400: '#facc15',
-  },
-  green: {
-    50: '#f0fdf4',
-    100: '#dcfce7',
-    700: '#15803d',
-  },
+  white: '#FFFFFF',
 };
 
 export const typography = {
-  fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, system-ui, sans-serif',
+  fontFamily: 'Georgia, "Garamond", serif',
+  fontStack: '"Georgia", "Garamond", serif',
   heading: {
     h1: {
       size: '2rem',
@@ -69,7 +63,7 @@ export const typography = {
   },
   body: {
     size: '1rem',
-    lineHeight: '1.5rem',
+    lineHeight: '1.7',
     weight: 400,
   },
   label: {
@@ -94,14 +88,18 @@ export const borderRadius = {
   sm: '0.5rem',
   md: '0.75rem',
   lg: '1rem',
+  organic: '12px',
+  round: '16px',
 };
 
 export const shadows = {
-  sm: '0 1px 2px rgba(0, 0, 0, 0.05)',
-  md: '0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.05)',
-  lg: '0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05)',
+  sm: '0 1px 2px rgba(160, 99, 74, 0.05)',
+  md: '0 4px 6px rgba(160, 99, 74, 0.07), 0 2px 4px rgba(160, 99, 74, 0.05)',
+  lg: '0 10px 15px rgba(160, 99, 74, 0.1), 0 4px 6px rgba(160, 99, 74, 0.05)',
+  warm: '0 4px 12px rgba(160, 99, 74, 0.15)',
 };
 
 export const transitions = {
-  default: 'all 0.2s ease',
+  default: 'all 0.2s ease-out',
+  smooth: 'all 0.3s ease-out',
 };

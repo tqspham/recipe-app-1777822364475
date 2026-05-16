@@ -54,17 +54,17 @@ export default function CreateRecipeContent() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="border-b border-gray-200 bg-white shadow-sm">
+    <div className="min-h-screen" style={{ backgroundColor: 'var(--color-background)' }}>
+      <header className="border-b" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-surface)' }}>
         <div className="container mx-auto max-w-4xl px-4 py-4">
           <nav className="flex gap-4">
-            <a href="/" className="text-lg font-medium text-gray-600 transition-colors duration-200 hover:text-gray-900">
+            <a href="/" className="text-lg font-medium transition-colors duration-200" style={{ color: 'var(--color-text)' }}>
               Recipes
             </a>
-            <a href="/favorites" className="text-lg font-medium text-gray-600 transition-colors duration-200 hover:text-gray-900">
+            <a href="/favorites" className="text-lg font-medium transition-colors duration-200" style={{ color: 'var(--color-text)' }}>
               Favorites
             </a>
-            <a href="/recipe/create" className="text-lg font-medium text-blue-600 transition-colors duration-200 hover:text-blue-700">
+            <a href="/recipe/create" className="text-lg font-medium" style={{ color: 'var(--color-primary)' }}>
               Create Recipe
             </a>
           </nav>
@@ -76,12 +76,12 @@ export default function CreateRecipeContent() {
           <BackButton onClick={handleBack} />
         </div>
 
-        <div className="rounded-[0.75rem] border border-gray-200 bg-white p-6 shadow-sm">
-          <h1 className="mb-6 text-3xl font-bold text-gray-900">Create a New Recipe</h1>
+        <div className="rounded-[12px] border-2 p-6" style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)' }}>
+          <h1 className="mb-6 text-3xl font-bold" style={{ color: 'var(--color-text)' }}>Create a New Recipe</h1>
 
           {error && (
-            <div className="mb-6 rounded-[0.75rem] border border-red-200 bg-red-50 p-4">
-              <p className="text-sm text-red-700 font-medium">{error}</p>
+            <div className="mb-6 rounded-[10px] border-2 p-4" style={{ backgroundColor: 'rgba(184, 92, 84, 0.05)', borderColor: 'var(--color-danger)' }}>
+              <p className="text-sm font-medium" style={{ color: 'var(--color-danger)' }}>{error}</p>
             </div>
           )}
 

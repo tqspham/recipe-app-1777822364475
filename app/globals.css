@@ -1,1 +1,245 @@
 @import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-background: #F5F1ED;
+    --color-surface: #FEFCF9;
+    --color-primary: #A0634A;
+    --color-secondary: #D4845C;
+    --color-accent: #8B6F47;
+    --color-text: #3D2E28;
+    --color-muted-text: #8B7D73;
+    --color-border: #D9CCC0;
+    --color-success: #7A9B6E;
+    --color-warning: #C48D4F;
+    --color-danger: #B85C54;
+    --color-white: #FFFFFF;
+
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 0.75rem;
+    --spacing-base: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-2xl: 2.5rem;
+    --spacing-3xl: 3rem;
+
+    --radius-sm: 0.5rem;
+    --radius-md: 0.75rem;
+    --radius-lg: 1rem;
+    --radius-organic: 12px;
+
+    --shadow-sm: 0 1px 2px rgba(160, 99, 74, 0.05);
+    --shadow-md: 0 4px 6px rgba(160, 99, 74, 0.07), 0 2px 4px rgba(160, 99, 74, 0.05);
+    --shadow-lg: 0 10px 15px rgba(160, 99, 74, 0.1), 0 4px 6px rgba(160, 99, 74, 0.05);
+    --shadow-warm: 0 4px 12px rgba(160, 99, 74, 0.15);
+
+    --transition-default: all 0.2s ease-out;
+  }
+
+  html {
+    font-family: Georgia, 'Garamond', serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-text);
+    line-height: 1.7;
+  }
+
+  h1 {
+    font-size: 2rem;
+    line-height: 2.5rem;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  button {
+    transition: var(--transition-default);
+  }
+
+  input,
+  textarea,
+  select {
+    transition: var(--transition-default);
+  }
+
+  a {
+    transition: var(--transition-default);
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply rounded-[12px] px-4 py-2 text-white font-medium transition-all duration-200 disabled:cursor-not-allowed;
+    background-color: var(--color-primary);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background-color: #8B5A3F;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .btn-primary:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  .btn-secondary {
+    @apply rounded-[12px] px-4 py-2 font-medium transition-all duration-200;
+    background-color: var(--color-secondary);
+    color: white;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .btn-secondary:hover {
+    background-color: #C1754F;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .btn-accent {
+    @apply rounded-[12px] px-4 py-2 font-medium transition-all duration-200;
+    background-color: var(--color-accent);
+    color: white;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .btn-accent:hover {
+    background-color: #7A5D3E;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .btn-success {
+    @apply rounded-[12px] px-4 py-2 font-medium transition-all duration-200;
+    background-color: var(--color-success);
+    color: white;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .btn-success:hover {
+    background-color: #6A8B5E;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .btn-danger {
+    @apply rounded-[12px] px-4 py-2 font-medium transition-all duration-200;
+    background-color: var(--color-danger);
+    color: white;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .btn-danger:hover {
+    background-color: #A34A42;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .card {
+    border-radius: var(--radius-md);
+    background-color: var(--color-surface);
+    border: 2px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .input-field {
+    border-radius: var(--radius-sm);
+    background-color: var(--color-surface);
+    border: 2px solid var(--color-border);
+    color: var(--color-text);
+    padding: 0.5rem 0.75rem;
+    font-family: Georgia, serif;
+  }
+
+  .input-field::placeholder {
+    color: var(--color-muted-text);
+  }
+
+  .input-field:focus {
+    outline: none;
+    border-color: var(--color-warning);
+    box-shadow: 0 0 0 3px rgba(196, 141, 79, 0.1);
+  }
+
+  .input-field:disabled {
+    background-color: #F5F1ED;
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .skeleton {
+    @apply animate-pulse;
+    background: linear-gradient(
+      90deg,
+      var(--color-background) 25%,
+      #E8DDD2 50%,
+      var(--color-background) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer-warm 2s infinite;
+  }
+
+  .divider {
+    height: 1px;
+    background-color: var(--color-border);
+  }
+
+  .badge {
+    @apply inline-block rounded-full px-3 py-1 text-sm font-medium;
+    background-color: rgba(160, 99, 74, 0.1);
+    color: var(--color-primary);
+  }
+
+  .badge-success {
+    background-color: rgba(122, 155, 110, 0.1);
+    color: var(--color-success);
+  }
+
+  .badge-warning {
+    background-color: rgba(196, 141, 79, 0.1);
+    color: var(--color-warning);
+  }
+
+  .badge-danger {
+    background-color: rgba(184, 92, 84, 0.1);
+    color: var(--color-danger);
+  }
+}
+
+@keyframes shimmer-warm {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes pulse-warm {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}

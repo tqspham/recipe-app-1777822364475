@@ -81,13 +81,14 @@ export default function FilterPanel({
     selectedCuisines.size > 0 || selectedMealTypes.size > 0 || selectedDietary.size > 0;
 
   return (
-    <div className="rounded-[0.75rem] border border-gray-200 bg-white p-4 shadow-sm">
+    <div className="rounded-[12px] border-2 p-4" style={{ backgroundColor: 'var(--color-surface)', borderColor: '#8B6F47' }}>
       <div className="mb-4 flex items-center justify-between">
-        <h3 className="font-semibold text-gray-900">Filters</h3>
+        <h3 className="font-semibold" style={{ color: 'var(--color-text)' }}>Filters</h3>
         {hasActiveFilters && (
           <button
             onClick={handleClearAll}
-            className="text-sm text-blue-600 font-medium transition-colors duration-200 hover:text-blue-700"
+            className="text-sm font-medium transition-colors duration-200 hover:opacity-75"
+            style={{ color: 'var(--color-primary)' }}
           >
             Clear All
           </button>
@@ -96,17 +97,16 @@ export default function FilterPanel({
 
       <div className="space-y-2">
         {/* Cuisine Type */}
-        <div className="border-t border-gray-100 pt-2">
+        <div style={{ borderTop: '1px solid var(--color-border)', paddingTop: '0.5rem' }}>
           <button
             onClick={() => toggleSection('cuisine')}
-            className="flex w-full items-center justify-between py-2 text-left text-sm font-medium text-gray-700 transition-colors duration-200 hover:text-gray-900"
+            className="flex w-full items-center justify-between py-2 text-left text-sm font-medium transition-colors duration-200"
+            style={{ color: 'var(--color-text)' }}
           >
             <span>Cuisine Type</span>
             <ChevronDown
               size={18}
-              className={`transition-transform duration-200 ${
-                expandedSections.has('cuisine') ? 'rotate-180' : ''
-              }`}
+              className={`transition-transform duration-200 ${expandedSections.has('cuisine') ? 'rotate-180' : ''}`}
             />
           </button>
           {expandedSections.has('cuisine') && (
@@ -117,9 +117,10 @@ export default function FilterPanel({
                     type="checkbox"
                     checked={selectedCuisines.has(cuisine)}
                     onChange={() => handleCuisineToggle(cuisine)}
-                    className="h-4 w-4 rounded border-gray-300 text-blue-600 transition-colors duration-200"
+                    className="h-4 w-4 rounded border-2 transition-colors duration-200"
+                    style={{ borderColor: 'var(--color-border)', accentColor: 'var(--color-primary)' }}
                   />
-                  <span className="text-sm text-gray-700">{cuisine}</span>
+                  <span className="text-sm" style={{ color: 'var(--color-text)' }}>{cuisine}</span>
                 </label>
               ))}
             </div>
@@ -127,17 +128,16 @@ export default function FilterPanel({
         </div>
 
         {/* Meal Type */}
-        <div className="border-t border-gray-100 pt-2">
+        <div style={{ borderTop: '1px solid var(--color-border)', paddingTop: '0.5rem' }}>
           <button
             onClick={() => toggleSection('mealType')}
-            className="flex w-full items-center justify-between py-2 text-left text-sm font-medium text-gray-700 transition-colors duration-200 hover:text-gray-900"
+            className="flex w-full items-center justify-between py-2 text-left text-sm font-medium transition-colors duration-200"
+            style={{ color: 'var(--color-text)' }}
           >
             <span>Meal Type</span>
             <ChevronDown
               size={18}
-              className={`transition-transform duration-200 ${
-                expandedSections.has('mealType') ? 'rotate-180' : ''
-              }`}
+              className={`transition-transform duration-200 ${expandedSections.has('mealType') ? 'rotate-180' : ''}`}
             />
           </button>
           {expandedSections.has('mealType') && (
@@ -148,9 +148,10 @@ export default function FilterPanel({
                     type="checkbox"
                     checked={selectedMealTypes.has(mealType)}
                     onChange={() => handleMealTypeToggle(mealType)}
-                    className="h-4 w-4 rounded border-gray-300 text-blue-600 transition-colors duration-200"
+                    className="h-4 w-4 rounded border-2 transition-colors duration-200"
+                    style={{ borderColor: 'var(--color-border)', accentColor: 'var(--color-primary)' }}
                   />
-                  <span className="text-sm text-gray-700">{mealType}</span>
+                  <span className="text-sm" style={{ color: 'var(--color-text)' }}>{mealType}</span>
                 </label>
               ))}
             </div>
@@ -158,17 +159,16 @@ export default function FilterPanel({
         </div>
 
         {/* Dietary Restrictions */}
-        <div className="border-t border-gray-100 pt-2">
+        <div style={{ borderTop: '1px solid var(--color-border)', paddingTop: '0.5rem' }}>
           <button
             onClick={() => toggleSection('dietary')}
-            className="flex w-full items-center justify-between py-2 text-left text-sm font-medium text-gray-700 transition-colors duration-200 hover:text-gray-900"
+            className="flex w-full items-center justify-between py-2 text-left text-sm font-medium transition-colors duration-200"
+            style={{ color: 'var(--color-text)' }}
           >
             <span>Dietary Restrictions</span>
             <ChevronDown
               size={18}
-              className={`transition-transform duration-200 ${
-                expandedSections.has('dietary') ? 'rotate-180' : ''
-              }`}
+              className={`transition-transform duration-200 ${expandedSections.has('dietary') ? 'rotate-180' : ''}`}
             />
           </button>
           {expandedSections.has('dietary') && (
@@ -179,9 +179,10 @@ export default function FilterPanel({
                     type="checkbox"
                     checked={selectedDietary.has(dietary)}
                     onChange={() => handleDietaryToggle(dietary)}
-                    className="h-4 w-4 rounded border-gray-300 text-blue-600 transition-colors duration-200"
+                    className="h-4 w-4 rounded border-2 transition-colors duration-200"
+                    style={{ borderColor: 'var(--color-border)', accentColor: 'var(--color-primary)' }}
                   />
-                  <span className="text-sm text-gray-700">{dietary}</span>
+                  <span className="text-sm" style={{ color: 'var(--color-text)' }}>{dietary}</span>
                 </label>
               ))}
             </div>

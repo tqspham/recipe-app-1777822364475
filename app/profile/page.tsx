@@ -68,12 +68,18 @@ export default function ProfilePage() {
 
   if (isLoading) {
     return (
-      <div className="flex h-screen items-center justify-center bg-gray-50">
+      <div className="flex h-screen items-center justify-center" style={{ backgroundColor: 'var(--color-background)' }}>
         <div className="text-center">
           <div className="mb-4 inline-block">
-            <div className="h-12 w-12 animate-pulse rounded-[0.5rem] border-4 border-gray-200 border-t-blue-600"></div>
+            <div
+              className="h-12 w-12 animate-pulse rounded-[8px] border-4"
+              style={{
+                borderColor: 'var(--color-background)',
+                borderTopColor: 'var(--color-primary)',
+              }}
+            />
           </div>
-          <p className="text-gray-600 font-medium">Loading profile...</p>
+          <p className="font-medium" style={{ color: 'var(--color-muted-text)' }}>Loading profile...</p>
         </div>
       </div>
     );
@@ -84,17 +90,17 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="sticky top-0 z-40 border-b border-gray-200 bg-white shadow-sm">
+    <div className="min-h-screen" style={{ backgroundColor: 'var(--color-background)' }}>
+      <header className="sticky top-0 z-40 border-b shadow-sm" style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)' }}>
         <div className="container mx-auto max-w-4xl px-4 py-4">
           <nav className="flex gap-4">
-            <a href="/" className="text-lg font-medium text-gray-600 transition-colors duration-200 hover:text-gray-900">
+            <a href="/" className="text-lg font-medium transition-colors duration-200" style={{ color: 'var(--color-text)' }}>
               Recipes
             </a>
-            <a href="/favorites" className="text-lg font-medium text-gray-600 transition-colors duration-200 hover:text-gray-900">
+            <a href="/favorites" className="text-lg font-medium transition-colors duration-200" style={{ color: 'var(--color-text)' }}>
               Favorites
             </a>
-            <a href="/profile" className="text-lg font-medium text-blue-600 transition-colors duration-200 hover:text-blue-700">
+            <a href="/profile" className="text-lg font-medium" style={{ color: 'var(--color-primary)' }}>
               Profile
             </a>
           </nav>
@@ -102,12 +108,12 @@ export default function ProfilePage() {
       </header>
 
       <main className="container mx-auto max-w-4xl px-4 py-8">
-        <div className="rounded-[0.75rem] border border-gray-200 bg-white p-8 shadow-sm">
-          <h1 className="mb-8 text-3xl font-bold text-gray-900">My Profile</h1>
+        <div className="rounded-[12px] border-2 p-8" style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)' }}>
+          <h1 className="mb-8 text-3xl font-bold" style={{ color: 'var(--color-text)' }}>My Profile</h1>
 
           {error && (
-            <div className="mb-6 rounded-[0.75rem] border border-red-200 bg-red-50 p-4">
-              <p className="text-sm text-red-700 font-medium">{error}</p>
+            <div className="mb-6 rounded-[10px] border-2 p-4" style={{ backgroundColor: 'rgba(184, 92, 84, 0.05)', borderColor: 'var(--color-danger)' }}>
+              <p className="text-sm font-medium" style={{ color: 'var(--color-danger)' }}>{error}</p>
             </div>
           )}
 
@@ -115,35 +121,35 @@ export default function ProfilePage() {
           <div className="space-y-6">
             {/* User Avatar and Basic Info */}
             <div className="flex items-center gap-6">
-              <div className="flex h-20 w-20 items-center justify-center rounded-[0.75rem] bg-blue-100">
-                <UserIcon size={40} className="text-blue-600" />
+              <div className="flex h-20 w-20 items-center justify-center rounded-[12px]" style={{ backgroundColor: 'var(--color-background)' }}>
+                <UserIcon size={40} style={{ color: 'var(--color-primary)' }} />
               </div>
               <div>
-                <h2 className="text-2xl font-semibold text-gray-900">User Account</h2>
-                <p className="text-gray-600 mt-1">Manage your recipe collection and preferences</p>
+                <h2 className="text-2xl font-semibold" style={{ color: 'var(--color-text)' }}>User Account</h2>
+                <p className="mt-1" style={{ color: 'var(--color-muted-text)' }}>Manage your recipe collection and preferences</p>
               </div>
             </div>
 
             {/* Account Details */}
-            <div className="border-t border-gray-200 pt-6">
-              <h3 className="mb-4 text-lg font-semibold text-gray-900">Account Details</h3>
+            <div style={{ borderTop: '1px solid var(--color-border)', paddingTop: '1.5rem' }}>
+              <h3 className="mb-4 text-lg font-semibold" style={{ color: 'var(--color-text)' }}>Account Details</h3>
               <div className="space-y-4">
-                <div className="rounded-[0.5rem] bg-gray-50 p-4 border border-gray-200">
+                <div className="rounded-[8px] border-2 p-4" style={{ backgroundColor: 'var(--color-background)', borderColor: 'var(--color-border)' }}>
                   <div className="flex items-center gap-3">
-                    <Mail size={20} className="text-gray-600" />
+                    <Mail size={20} style={{ color: 'var(--color-muted-text)' }} />
                     <div>
-                      <p className="text-sm font-medium text-gray-600">Email Address</p>
-                      <p className="text-gray-900 font-semibold">{user.email}</p>
+                      <p className="text-sm font-medium" style={{ color: 'var(--color-muted-text)' }}>Email Address</p>
+                      <p className="font-semibold" style={{ color: 'var(--color-text)' }}>{user.email}</p>
                     </div>
                   </div>
                 </div>
 
-                <div className="rounded-[0.5rem] bg-gray-50 p-4 border border-gray-200">
+                <div className="rounded-[8px] border-2 p-4" style={{ backgroundColor: 'var(--color-background)', borderColor: 'var(--color-border)' }}>
                   <div className="flex items-center gap-3">
-                    <UserIcon size={20} className="text-gray-600" />
+                    <UserIcon size={20} style={{ color: 'var(--color-muted-text)' }} />
                     <div>
-                      <p className="text-sm font-medium text-gray-600">User ID</p>
-                      <p className="text-gray-900 font-semibold text-sm break-all">{user.id}</p>
+                      <p className="text-sm font-medium" style={{ color: 'var(--color-muted-text)' }}>User ID</p>
+                      <p className="text-sm font-semibold break-all" style={{ color: 'var(--color-text)' }}>{user.id}</p>
                     </div>
                   </div>
                 </div>
@@ -151,12 +157,25 @@ export default function ProfilePage() {
             </div>
 
             {/* Account Actions */}
-            <div className="border-t border-gray-200 pt-6">
-              <h3 className="mb-4 text-lg font-semibold text-gray-900">Account Actions</h3>
+            <div style={{ borderTop: '1px solid var(--color-border)', paddingTop: '1.5rem' }}>
+              <h3 className="mb-4 text-lg font-semibold" style={{ color: 'var(--color-text)' }}>Account Actions</h3>
               <button
                 onClick={handleLogout}
                 disabled={isLoggingOut}
-                className="flex items-center gap-2 rounded-[0.5rem] bg-red-600 px-6 py-3 text-white font-medium transition-all duration-200 hover:bg-red-700 active:bg-red-800 disabled:bg-gray-400 disabled:cursor-not-allowed shadow-sm hover:shadow-md focus:outline-2 focus:outline-red-500"
+                className="flex items-center gap-2 rounded-[10px] px-6 py-3 text-white font-medium transition-all duration-200 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                style={{ backgroundColor: 'var(--color-danger)' }}
+                onMouseEnter={(e) => {
+                  if (!isLoggingOut) {
+                    e.currentTarget.style.backgroundColor = '#A34A42';
+                    e.currentTarget.style.boxShadow = 'var(--shadow-md)';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!isLoggingOut) {
+                    e.currentTarget.style.backgroundColor = 'var(--color-danger)';
+                    e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
+                  }
+                }}
                 aria-label="Log out of your account"
               >
                 <LogOut size={20} />
